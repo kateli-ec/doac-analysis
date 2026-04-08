@@ -335,7 +335,7 @@ if len(clip_with) > 0:
         title="Episode Views vs Total Clip Views",
         labels={"view_count": "Episode Views", "clip_total_views": "Total Clip Views"},
         template="plotly_white", height=400,
-        trendline="ols", color_discrete_sequence=["#42A5F5"],
+        color_discrete_sequence=["#42A5F5"],
     )
     st.plotly_chart(fig, use_container_width=True)
 
