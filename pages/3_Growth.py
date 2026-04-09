@@ -252,67 +252,26 @@ for era_name in ERA_ORDER:
         "Top 10% Threshold": era_eps["view_count"].quantile(0.9),
     })
 
-detail_raw = pd.DataFrame(detail_rows_raw)
+detail_display = []
+for r in detail_rows_raw:
+    detail_display.append({
+        "Era": r["Era"],
+        "Episodes": r["Episodes"],
+        "Avg Views": f"{r['Avg Views']:,.0f}",
+        "Median Views": f"{r['Median Views']:,.0f}",
+        "Max Views": f"{r['Max Views']:,.0f}",
+        "Min Views": f"{r['Min Views']:,.0f}",
+        "Total Views": format_number(r["Total Views"]),
+        "Avg Likes": f"{r['Avg Likes']:,.0f}",
+        "Avg Comments": f"{r['Avg Comments']:,.0f}",
+        "Avg Engagement %": f"{r['Avg Engagement %']:.2f}%",
+        "Avg Duration": f"{r['Avg Duration (min)']:.0f}m",
+        "Avg Eps/Month": f"{r['Avg Eps/Month']:.1f}",
+        "Views Std Dev": f"{r['Views Std Dev']:,.0f}",
+        "Top 10% Threshold": f"{r['Top 10% Threshold']:,.0f}",
+    })
 
-# Build HTML with inline color bars for numeric columns
-bar_color = "#42A5F5"
-bar_cols = ["Avg Views", "Median Views", "Max Views", "Total Views",
-            "Avg Likes", "Avg Comments", "Avg Engagement %",
-            "Avg Duration (min)", "Avg Eps/Month", "Top 10% Threshold"]
-
-
-def make_bar_cell(val, col_max, fmt_str):
-    """Render a table cell with a background bar proportional to val/col_max."""
-    pct = val / col_max * 100 if col_max > 0 else 0
-    return (
-        f'<td style="position:relative; padding:6px 8px;">'
-        f'<div style="position:absolute; left:0; top:0; bottom:0; width:{pct:.0f}%; '
-        f'background:rgba(66,165,245,0.15); z-index:0;"></div>'
-        f'<span style="position:relative; z-index:1;">{fmt_str}</span></td>'
-    )
-
-
-# Build HTML table manually
-html = '<table class="detail-table"><thead><tr>'
-for col in detail_raw.columns:
-    html += f"<th>{col}</th>"
-html += "</tr></thead><tbody>"
-
-col_maxes = {col: detail_raw[col].max() for col in bar_cols}
-
-for _, row in detail_raw.iterrows():
-    html += "<tr>"
-    for col in detail_raw.columns:
-        val = row[col]
-        if col == "Era":
-            html += f'<td style="padding:6px 8px; font-weight:bold;">{val}</td>'
-        elif col in bar_cols:
-            if col == "Avg Engagement %":
-                fmt = f"{val:.2f}%"
-            elif col == "Avg Duration (min)":
-                fmt = f"{val:.0f}m"
-            elif col == "Avg Eps/Month":
-                fmt = f"{val:.1f}"
-            elif val >= 1_000_000:
-                fmt = f"{val:,.0f}"
-            else:
-                fmt = f"{val:,.0f}"
-            html += make_bar_cell(val, col_maxes[col], fmt)
-        else:
-            fmt = f"{val:,.0f}" if isinstance(val, (int, float)) else str(val)
-            html += f'<td style="padding:6px 8px;">{fmt}</td>'
-    html += "</tr>"
-html += "</tbody></table>"
-
-st.markdown(html, unsafe_allow_html=True)
-st.markdown(
-    """<style>
-    .detail-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .detail-table th { background: #f5f5f5; padding: 6px 8px; text-align: left; border-bottom: 2px solid #ddd; white-space: nowrap; }
-    .detail-table td { border-bottom: 1px solid #eee; vertical-align: top; white-space: nowrap; }
-    </style>""",
-    unsafe_allow_html=True,
-)
+st.dataframe(pd.DataFrame(detail_display), use_container_width=True, hide_index=True)
 
 # View distribution box plot
 df_ep_known = df_episodes[df_episodes["era"].isin(ERA_ORDER)]
@@ -461,14 +420,14 @@ if not viral_all.empty:
             "Published": v["published_at"].strftime("%Y-%m-%d"),
             "Duration": f"{h}h {m}m" if h else f"{m}m {s}s",
             "Era": v["era"],
-            "Views": int(v["view_count"]),
-            "Era Avg Views": int(v["era_view_mean"]),
-            "View Std Dev Above Mean": round(v["view_z"], 1),
-            "Likes": int(v["like_count"]),
-            "Comments": int(v["comment_count"]),
-            "Engagement %": round(v["engagement_rate"] * 100, 2),
-            "Era Avg Engagement %": round(v["era_eng_mean"] * 100, 2),
-            "Eng Std Dev Above Mean": round(v["eng_z"], 1),
+            "Views": f"{int(v['view_count']):,}",
+            "Era Avg Views": f"{int(v['era_view_mean']):,}",
+            "View Std Dev Above Mean": f"{v['view_z']:.1f}x",
+            "Likes": f"{int(v['like_count']):,}",
+            "Comments": f"{int(v['comment_count']):,}",
+            "Engagement %": f"{v['engagement_rate'] * 100:.2f}%",
+            "Era Avg Engagement %": f"{v['era_eng_mean'] * 100:.2f}%",
+            "Eng Std Dev Above Mean": f"{v['eng_z']:.1f}x",
         })
 
     viral_df_display = pd.DataFrame(viral_table)
@@ -478,14 +437,6 @@ if not viral_all.empty:
         hide_index=True,
         column_config={
             "Link": st.column_config.LinkColumn("Link", display_text="Watch"),
-            "Views": st.column_config.NumberColumn(format="%,d"),
-            "Era Avg Views": st.column_config.NumberColumn(format="%,d"),
-            "Likes": st.column_config.NumberColumn(format="%,d"),
-            "Comments": st.column_config.NumberColumn(format="%,d"),
-            "Engagement %": st.column_config.NumberColumn(format="%.2f%%"),
-            "Era Avg Engagement %": st.column_config.NumberColumn(format="%.2f%%"),
-            "View Std Dev Above Mean": st.column_config.NumberColumn(format="%.1fx"),
-            "Eng Std Dev Above Mean": st.column_config.NumberColumn(format="%.1fx"),
         },
     )
 
@@ -586,18 +537,13 @@ for era_name in ERA_ORDER:
         "Viral Episodes": len(era_v),
         "Total Episodes": len(era_all),
         "Viral Rate": f"{len(era_v)/len(era_all)*100:.0f}%" if len(era_all) > 0 else "0%",
-        "Viral Views": int(v_total),
-        "Total Views": int(total),
+        "Viral Views": f"{int(v_total):,}",
+        "Total Views": f"{int(total):,}",
         "Viral Share of Views": f"{v_total/total*100:.0f}%" if total > 0 else "0%",
         "Non-Viral Avg Views": f"{era_nv['view_count'].mean():,.0f}" if len(era_nv) > 0 else "0",
     })
 
-st.dataframe(pd.DataFrame(contrib_rows), use_container_width=True, hide_index=True,
-    column_config={
-        "Viral Views": st.column_config.NumberColumn(format="%,d"),
-        "Total Views": st.column_config.NumberColumn(format="%,d"),
-    },
-)
+st.dataframe(pd.DataFrame(contrib_rows), use_container_width=True, hide_index=True)
 
 st.markdown("""
 **Viral videos contributed 32% of total views in Pre-Growth but only 14% in the Clip Era.**
