@@ -252,67 +252,65 @@ for era_name in ERA_ORDER:
         "Top 10% Threshold": era_eps["view_count"].quantile(0.9),
     })
 
-detail_raw = pd.DataFrame(detail_rows_raw)
+if detail_rows_raw:
+    detail_raw = pd.DataFrame(detail_rows_raw)
 
-# Build HTML with inline color bars for numeric columns
-bar_color = "#42A5F5"
-bar_cols = ["Avg Views", "Median Views", "Max Views", "Total Views",
-            "Avg Likes", "Avg Comments", "Avg Engagement %",
-            "Avg Duration (min)", "Avg Eps/Month", "Top 10% Threshold"]
+    # Column definitions: (col_name, is_bar_col, format_func)
+    col_defs = [
+        ("Era", False, str),
+        ("Episodes", False, lambda v: f"{v:,.0f}"),
+        ("Avg Views", True, lambda v: f"{v:,.0f}"),
+        ("Median Views", True, lambda v: f"{v:,.0f}"),
+        ("Max Views", True, lambda v: f"{v:,.0f}"),
+        ("Min Views", False, lambda v: f"{v:,.0f}"),
+        ("Total Views", True, lambda v: f"{v:,.0f}"),
+        ("Avg Likes", True, lambda v: f"{v:,.0f}"),
+        ("Avg Comments", True, lambda v: f"{v:,.0f}"),
+        ("Avg Engagement %", True, lambda v: f"{v:.2f}%"),
+        ("Avg Duration (min)", True, lambda v: f"{v:.0f}m"),
+        ("Avg Eps/Month", True, lambda v: f"{v:.1f}"),
+        ("Views Std Dev", False, lambda v: f"{v:,.0f}"),
+        ("Top 10% Threshold", True, lambda v: f"{v:,.0f}"),
+    ]
 
+    col_maxes = {}
+    for col_name, is_bar, _ in col_defs:
+        if is_bar and col_name in detail_raw.columns:
+            col_maxes[col_name] = float(detail_raw[col_name].max())
 
-def make_bar_cell(val, col_max, fmt_str):
-    """Render a table cell with a background bar proportional to val/col_max."""
-    pct = val / col_max * 100 if col_max > 0 else 0
-    return (
-        f'<td style="position:relative; padding:6px 8px;">'
-        f'<div style="position:absolute; left:0; top:0; bottom:0; width:{pct:.0f}%; '
-        f'background:rgba(66,165,245,0.15); z-index:0;"></div>'
-        f'<span style="position:relative; z-index:1;">{fmt_str}</span></td>'
-    )
+    html = '<table class="detail-table"><thead><tr>'
+    for col_name, _, _ in col_defs:
+        html += f"<th>{col_name}</th>"
+    html += "</tr></thead><tbody>"
 
-
-# Build HTML table manually
-html = '<table class="detail-table"><thead><tr>'
-for col in detail_raw.columns:
-    html += f"<th>{col}</th>"
-html += "</tr></thead><tbody>"
-
-col_maxes = {col: detail_raw[col].max() for col in bar_cols}
-
-for _, row in detail_raw.iterrows():
-    html += "<tr>"
-    for col in detail_raw.columns:
-        val = row[col]
-        if col == "Era":
-            html += f'<td style="padding:6px 8px; font-weight:bold;">{val}</td>'
-        elif col in bar_cols:
-            if col == "Avg Engagement %":
-                fmt = f"{val:.2f}%"
-            elif col == "Avg Duration (min)":
-                fmt = f"{val:.0f}m"
-            elif col == "Avg Eps/Month":
-                fmt = f"{val:.1f}"
-            elif val >= 1_000_000:
-                fmt = f"{val:,.0f}"
+    for _, row in detail_raw.iterrows():
+        html += "<tr>"
+        for col_name, is_bar, fmt_fn in col_defs:
+            val = row.get(col_name, "")
+            if col_name == "Era":
+                html += f'<td style="padding:6px 8px; font-weight:bold;">{val}</td>'
+            elif is_bar and col_name in col_maxes and col_maxes[col_name] > 0:
+                pct = float(val) / col_maxes[col_name] * 100
+                html += (
+                    f'<td style="position:relative; padding:6px 8px;">'
+                    f'<div style="position:absolute; left:0; top:0; bottom:0; width:{pct:.0f}%; '
+                    f'background:rgba(66,165,245,0.15); z-index:0;"></div>'
+                    f'<span style="position:relative; z-index:1;">{fmt_fn(val)}</span></td>'
+                )
             else:
-                fmt = f"{val:,.0f}"
-            html += make_bar_cell(val, col_maxes[col], fmt)
-        else:
-            fmt = f"{val:,.0f}" if isinstance(val, (int, float)) else str(val)
-            html += f'<td style="padding:6px 8px;">{fmt}</td>'
-    html += "</tr>"
-html += "</tbody></table>"
+                html += f'<td style="padding:6px 8px;">{fmt_fn(val) if callable(fmt_fn) else val}</td>'
+        html += "</tr>"
+    html += "</tbody></table>"
 
-st.markdown(html, unsafe_allow_html=True)
-st.markdown(
-    """<style>
-    .detail-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .detail-table th { background: #f5f5f5; padding: 6px 8px; text-align: left; border-bottom: 2px solid #ddd; white-space: nowrap; }
-    .detail-table td { border-bottom: 1px solid #eee; vertical-align: top; white-space: nowrap; }
-    </style>""",
-    unsafe_allow_html=True,
-)
+    st.markdown(html, unsafe_allow_html=True)
+    st.markdown(
+        """<style>
+        .detail-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .detail-table th { background: #f5f5f5; padding: 6px 8px; text-align: left; border-bottom: 2px solid #ddd; white-space: nowrap; }
+        .detail-table td { border-bottom: 1px solid #eee; vertical-align: top; white-space: nowrap; }
+        </style>""",
+        unsafe_allow_html=True,
+    )
 
 # View distribution box plot
 df_ep_known = df_episodes[df_episodes["era"].isin(ERA_ORDER)]
