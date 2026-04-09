@@ -149,7 +149,7 @@ fig_era.update_layout(
     template="plotly_white", height=500, barmode="stack",
     yaxis_title="Avg Views/Episode", xaxis_title="Month",
     hovermode="x unified",
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
+    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, traceorder="normal"),
 )
 st.plotly_chart(fig_era, use_container_width=True)
 
