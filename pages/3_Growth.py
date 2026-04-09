@@ -612,10 +612,6 @@ st.markdown("---")
 # ==================================================================
 st.header("Do Better Descriptions Lead to More Views?")
 
-import json as _json
-# Description analysis uses pre-computed desc from parquet
-_raw_lookup = {}
-
 df_desc = df_episodes.copy()
 df_desc["full_desc"] = df_desc["description"].fillna("")
 df_desc["desc_len"] = df_desc["full_desc"].str.len()
