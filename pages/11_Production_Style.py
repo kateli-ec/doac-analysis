@@ -441,11 +441,15 @@ for ch, p in PRODUCTION.items():
     elif any(w in set_text for w in ["warm", "cozy", "library", "bookshelf", "wood"]):
         set_mood = "Warm & Cozy"
     elif any(w in set_text for w in ["corporate", "news", "branded", "pbd"]):
-        set_mood = "Corporate & Branded"
+        set_mood = "News Desk / Broadcast"
     elif any(w in set_text for w in ["home", "remote", "zoom", "webcam"]):
         set_mood = "Home / Remote"
+    elif any(w in set_text for w in ["upscale", "lounge", "stained", "eclectic", "architectural", "historic"]):
+        set_mood = "Curated & Distinctive"
+    elif any(w in set_text for w in ["varies", "lecture", "stage", "event"]):
+        set_mood = "Varies / Mixed"
     else:
-        set_mood = "Other"
+        set_mood = "Warm & Cozy"  # default for unmatched studio sets
 
     # Camera style
     cam_text = p["camera"].lower()
@@ -480,7 +484,7 @@ for ch, p in PRODUCTION.items():
         vibe_cat = "Intimate & Deep"
     elif any(w in vibe_text for w in ["casual", "hangout", "garage", "celebrity"]):
         vibe_cat = "Casual Hangout"
-    elif any(w in vibe_text for w in ["scientific", "academic", "focused", "serious", "authority"]):
+    elif any(w in vibe_text for w in ["scientific", "academic", "focused", "serious", "authority", "disciplined", "military"]):
         vibe_cat = "Authoritative & Intellectual"
     elif any(w in vibe_text for w in ["warm", "friendly", "spiritual", "cozy", "consultation"]):
         vibe_cat = "Warm & Approachable"
@@ -490,8 +494,12 @@ for ch, p in PRODUCTION.items():
         vibe_cat = "Professional & Corporate"
     elif any(w in vibe_text for w in ["tech", "creator", "founder", "venture", "fireside"]):
         vibe_cat = "Tech / Founder"
+    elif any(w in vibe_text for w in ["intellectual", "lounge", "eclectic", "den"]):
+        vibe_cat = "Authoritative & Intellectual"
+    elif any(w in vibe_text for w in ["natural", "conversation"]):
+        vibe_cat = "Casual Hangout"
     else:
-        vibe_cat = "Other"
+        vibe_cat = "Casual Hangout"  # default for unmatched conversational vibes
 
     categories.append({
         "Channel": ch,
@@ -553,6 +561,126 @@ with col4:
 
 # Summary table
 st.dataframe(cat_df, use_container_width=True, hide_index=True)
+
+st.markdown("---")
+
+# ==================================================================
+# SECTION 1b: How Production Choices Shape Vibe (Relational Analysis)
+# ==================================================================
+st.header("How Production Choices Shape Vibe")
+st.caption("Do specific combinations of set, camera, and wardrobe consistently produce the same viewer feeling?")
+
+import plotly.figure_factory as ff
+
+# Heatmap: Set Mood -> Vibe
+st.subheader("Set Mood vs Vibe")
+ct_set_vibe = pd.crosstab(cat_df["Set Mood"], cat_df["Vibe"])
+if not ct_set_vibe.empty:
+    fig = px.imshow(ct_set_vibe, text_auto=True, aspect="auto",
+                    title="Which set moods produce which vibes?",
+                    template="plotly_white", color_continuous_scale="Blues",
+                    labels=dict(x="Vibe", y="Set Mood", color="Channels"))
+    fig.update_layout(height=350)
+    st.plotly_chart(fig, use_container_width=True)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Wardrobe vs Vibe")
+    ct_ward_vibe = pd.crosstab(cat_df["Wardrobe"], cat_df["Vibe"])
+    if not ct_ward_vibe.empty:
+        fig = px.imshow(ct_ward_vibe, text_auto=True, aspect="auto",
+                        title="Which wardrobe choices produce which vibes?",
+                        template="plotly_white", color_continuous_scale="Oranges",
+                        labels=dict(x="Vibe", y="Wardrobe", color="Channels"))
+        fig.update_layout(height=300)
+        st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    st.subheader("Camera Setup vs Vibe")
+    ct_cam_vibe = pd.crosstab(cat_df["Camera Style"], cat_df["Vibe"])
+    if not ct_cam_vibe.empty:
+        fig = px.imshow(ct_cam_vibe, text_auto=True, aspect="auto",
+                        title="Which camera setups produce which vibes?",
+                        template="plotly_white", color_continuous_scale="Greens",
+                        labels=dict(x="Vibe", y="Camera Setup", color="Channels"))
+        fig.update_layout(height=300)
+        st.plotly_chart(fig, use_container_width=True)
+
+# Set -> Wardrobe correlation
+st.subheader("Set Mood vs Wardrobe")
+ct_set_ward = pd.crosstab(cat_df["Set Mood"], cat_df["Wardrobe"])
+if not ct_set_ward.empty:
+    fig = px.imshow(ct_set_ward, text_auto=True, aspect="auto",
+                    title="Do hosts dress differently depending on their set?",
+                    template="plotly_white", color_continuous_scale="Purples",
+                    labels=dict(x="Wardrobe", y="Set Mood", color="Channels"))
+    fig.update_layout(height=300)
+    st.plotly_chart(fig, use_container_width=True)
+
+# Production formulas
+st.subheader("Common Production Formulas")
+st.caption("Most frequent combinations of set + camera + wardrobe, and what vibe they create.")
+
+formulas = cat_df.groupby(["Set Mood", "Camera Style", "Wardrobe", "Vibe"]).size().reset_index(name="Channels")
+formulas = formulas.sort_values("Channels", ascending=False)
+
+# Show which channels use each formula
+formula_rows = []
+for _, f in formulas.iterrows():
+    matching = cat_df[
+        (cat_df["Set Mood"] == f["Set Mood"]) &
+        (cat_df["Camera Style"] == f["Camera Style"]) &
+        (cat_df["Wardrobe"] == f["Wardrobe"]) &
+        (cat_df["Vibe"] == f["Vibe"])
+    ]["Channel"].tolist()
+    formula_rows.append({
+        "Set": f["Set Mood"],
+        "Camera": f["Camera Style"],
+        "Wardrobe": f["Wardrobe"],
+        "Resulting Vibe": f["Vibe"],
+        "Count": f["Channels"],
+        "Channels": ", ".join(matching),
+    })
+
+st.dataframe(pd.DataFrame(formula_rows), use_container_width=True, hide_index=True)
+
+st.markdown("---")
+
+# Key findings
+st.subheader("Key Relationships")
+
+st.markdown("""
+**1. Dark sets almost always produce "Intimate & Deep" or "Authoritative" vibes.**
+Out of the Dark & Moody channels, the majority land in Intimate & Deep (DOAC, Lex, Rich Roll)
+or Authoritative (Huberman, Jocko). Zero dark sets produce a "Warm & Approachable" or
+"Casual Hangout" vibe. The darkness itself communicates seriousness.
+
+**2. Warm & Cozy sets are the most versatile.**
+Warm sets produce the widest range of vibes: Casual Hangout (Armchair Expert), Warm & Approachable
+(Sammi Cohen), Authoritative (Tim Ferriss), and more. The warmth is a neutral canvas that lets the
+host's personality define the vibe rather than the set dictating it.
+
+**3. All-black wardrobe clusters with dark sets and deep vibes.**
+All-black wardrobe hosts (DOAC, Huberman, Impact Theory, Rich Roll) overwhelmingly choose dark or
+minimal sets. The uniform removes visual distraction and signals "focus on what I'm saying, not
+what I'm wearing." This formula consistently produces serious/intellectual vibes.
+
+**4. Formal wardrobe (suits) splits between Authoritative and Professional.**
+The two suit-wearing hosts (Peterson, PBD) both produce authority-based vibes, but through
+different mechanisms: Peterson through academic theatrical staging, PBD through corporate news
+desk aesthetics.
+
+**5. Multi-cam is necessary but not sufficient for Intimate vibes.**
+All Intimate & Deep channels use multi-cam, but so do most other channels. What differentiates
+intimate from casual is the combination of multi-cam WITH dark lighting AND hidden equipment.
+Showing mics and headphones (Rogan, Jocko) immediately shifts the vibe away from intimate toward
+"you're watching a show."
+
+**6. No channel creates a "Warm & Approachable" vibe with dark lighting.**
+Every Warm & Approachable channel (Jay Shetty, Dr Chatterjee, Sammi Cohen) uses warm or bright
+lighting. This is the strongest single-factor correlation in the data: warm vibe requires warm light.
+""")
 
 st.markdown("---")
 
