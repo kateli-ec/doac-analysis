@@ -421,6 +421,144 @@ PRODUCTION = {
 }
 
 # ---- Section 1: Production Breakdown by Channel ----
+# ==================================================================
+# SECTION 1: Production Style Distribution (Pie Charts)
+# ==================================================================
+st.header("Production Style Distribution")
+st.caption(f"Based on {len(PRODUCTION)} channels analyzed.")
+
+import plotly.express as px
+
+# Categorize each channel
+categories = []
+for ch, p in PRODUCTION.items():
+    # Set mood
+    set_text = (p["set"] + " " + p.get("key", p.get("key_elements", ""))).lower()
+    if any(w in set_text for w in ["dark", "black", "minimal", "spartan"]):
+        set_mood = "Dark & Moody"
+    elif any(w in set_text for w in ["bright", "natural", "daylight", "garden"]):
+        set_mood = "Bright & Natural"
+    elif any(w in set_text for w in ["warm", "cozy", "library", "bookshelf", "wood"]):
+        set_mood = "Warm & Cozy"
+    elif any(w in set_text for w in ["corporate", "news", "branded", "pbd"]):
+        set_mood = "Corporate & Branded"
+    elif any(w in set_text for w in ["home", "remote", "zoom", "webcam"]):
+        set_mood = "Home / Remote"
+    else:
+        set_mood = "Other"
+
+    # Camera style
+    cam_text = p["camera"].lower()
+    if any(w in cam_text for w in ["multi", "multiple", "5 frame"]):
+        if any(w in cam_text for w in ["zoom", "graphics", "dynamic"]):
+            cam_style = "Multi-cam + Post-production"
+        else:
+            cam_style = "Multi-cam Standard"
+    elif any(w in cam_text for w in ["split", "zoom", "remote", "webcam"]):
+        cam_style = "Remote / Split-screen"
+    elif any(w in cam_text for w in ["single", "solo"]):
+        cam_style = "Single Camera"
+    else:
+        cam_style = "Standard Dual Camera"
+
+    # Wardrobe
+    ward_text = p["wardrobe"].lower()
+    if any(w in ward_text for w in ["suit", "tweed", "formal", "tie"]):
+        wardrobe = "Formal (suit/blazer)"
+    elif any(w in ward_text for w in ["all black", "always black", "all-black"]):
+        wardrobe = "All Black"
+    elif any(w in ward_text for w in ["blazer", "button-down", "polo", "semi-formal", "polished"]):
+        wardrobe = "Smart Casual"
+    elif any(w in ward_text for w in ["graphic", "cap", "baseball", "casual", "t-shirt", "tee"]):
+        wardrobe = "Casual / Streetwear"
+    else:
+        wardrobe = "Casual / Streetwear"
+
+    # Vibe
+    vibe_text = p["vibe"].lower()
+    if any(w in vibe_text for w in ["intimate", "cinematic", "intense", "philosophical"]):
+        vibe_cat = "Intimate & Deep"
+    elif any(w in vibe_text for w in ["casual", "hangout", "garage", "celebrity"]):
+        vibe_cat = "Casual Hangout"
+    elif any(w in vibe_text for w in ["scientific", "academic", "focused", "serious", "authority"]):
+        vibe_cat = "Authoritative & Intellectual"
+    elif any(w in vibe_text for w in ["warm", "friendly", "spiritual", "cozy", "consultation"]):
+        vibe_cat = "Warm & Approachable"
+    elif any(w in vibe_text for w in ["energy", "motivational", "aspirational", "modern"]):
+        vibe_cat = "High Energy & Motivational"
+    elif any(w in vibe_text for w in ["corporate", "news", "business", "professional", "journalism"]):
+        vibe_cat = "Professional & Corporate"
+    elif any(w in vibe_text for w in ["tech", "creator", "founder", "venture", "fireside"]):
+        vibe_cat = "Tech / Founder"
+    else:
+        vibe_cat = "Other"
+
+    categories.append({
+        "Channel": ch,
+        "Set Mood": set_mood,
+        "Camera Style": cam_style,
+        "Wardrobe": wardrobe,
+        "Vibe": vibe_cat,
+    })
+
+cat_df = pd.DataFrame(categories)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    set_counts = cat_df["Set Mood"].value_counts().reset_index()
+    set_counts.columns = ["Set Mood", "Count"]
+    fig = px.pie(set_counts, names="Set Mood", values="Count",
+                 title="Set Mood / Background",
+                 template="plotly_white", hole=0.35,
+                 color_discrete_sequence=px.colors.qualitative.Set2)
+    fig.update_traces(textinfo="label+percent", textposition="outside")
+    fig.update_layout(showlegend=False, height=380)
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    cam_counts = cat_df["Camera Style"].value_counts().reset_index()
+    cam_counts.columns = ["Camera Style", "Count"]
+    fig = px.pie(cam_counts, names="Camera Style", values="Count",
+                 title="Camera Setup",
+                 template="plotly_white", hole=0.35,
+                 color_discrete_sequence=px.colors.qualitative.Pastel)
+    fig.update_traces(textinfo="label+percent", textposition="outside")
+    fig.update_layout(showlegend=False, height=380)
+    st.plotly_chart(fig, use_container_width=True)
+
+col3, col4 = st.columns(2)
+
+with col3:
+    ward_counts = cat_df["Wardrobe"].value_counts().reset_index()
+    ward_counts.columns = ["Wardrobe", "Count"]
+    fig = px.pie(ward_counts, names="Wardrobe", values="Count",
+                 title="Host Wardrobe / Dress Code",
+                 template="plotly_white", hole=0.35,
+                 color_discrete_sequence=px.colors.qualitative.Bold)
+    fig.update_traces(textinfo="label+percent", textposition="outside")
+    fig.update_layout(showlegend=False, height=380)
+    st.plotly_chart(fig, use_container_width=True)
+
+with col4:
+    vibe_counts = cat_df["Vibe"].value_counts().reset_index()
+    vibe_counts.columns = ["Vibe", "Count"]
+    fig = px.pie(vibe_counts, names="Vibe", values="Count",
+                 title="General Vibe",
+                 template="plotly_white", hole=0.35,
+                 color_discrete_sequence=px.colors.qualitative.Vivid)
+    fig.update_traces(textinfo="label+percent", textposition="outside")
+    fig.update_layout(showlegend=False, height=380)
+    st.plotly_chart(fig, use_container_width=True)
+
+# Summary table
+st.dataframe(cat_df, use_container_width=True, hide_index=True)
+
+st.markdown("---")
+
+# ==================================================================
+# SECTION 2: Production Breakdown by Channel
+# ==================================================================
 st.header("Production Breakdown by Channel")
 
 for channel_name, prod in PRODUCTION.items():
