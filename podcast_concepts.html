@@ -4,235 +4,246 @@
 <meta charset="utf-8">
 <title>Podcast Concepts</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; }
-
-/* Tabs */
-.tabs { display: flex; border-bottom: 2px solid #333; background: #1a1a1a; position: sticky; top: 0; z-index: 100; }
-.tab { padding: 14px 24px; cursor: pointer; color: #888; font-size: 14px; font-weight: 600; border-bottom: 3px solid transparent; transition: all 0.2s; }
-.tab:hover { color: #ccc; }
-.tab.active { color: #42A5F5; border-bottom-color: #42A5F5; }
-.tab-content { display: none; padding: 30px; max-width: 1200px; margin: 0 auto; }
-.tab-content.active { display: block; }
-.placeholder { text-align: center; padding: 100px 40px; color: #555; }
-.placeholder h2 { font-size: 2em; margin-bottom: 10px; color: #444; }
-
-/* Concept 1 styles */
-h1 { font-size: 2.2em; margin-bottom: 8px; color: #fff; }
-h2 { font-size: 1.5em; margin: 30px 0 12px; color: #42A5F5; border-bottom: 1px solid #333; padding-bottom: 6px; }
-h3 { font-size: 1.2em; margin: 20px 0 8px; color: #90CAF9; }
-p, li { line-height: 1.6; margin-bottom: 8px; color: #ccc; }
-.pitch { font-size: 1.1em; color: #fff; background: #1e1e1e; padding: 16px 20px; border-left: 4px solid #42A5F5; border-radius: 4px; margin: 16px 0; }
-.season { background: #1a1a1a; border-radius: 10px; padding: 20px; margin: 20px 0; border: 1px solid #2a2a2a; }
-.season-title { font-size: 1.3em; font-weight: 700; color: #FF7043; margin-bottom: 4px; }
-.season-puzzle { font-style: italic; color: #aaa; margin-bottom: 12px; }
-
-/* Guest table */
-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
-th { background: #252525; padding: 8px 10px; text-align: left; color: #aaa; border-bottom: 2px solid #333; font-weight: 600; }
-td { padding: 8px 10px; border-bottom: 1px solid #222; vertical-align: top; }
-tr:hover { background: #1e1e1e; }
-.tier-a { border-left: 3px solid #F44336; }
-.tier-b { border-left: 3px solid #FF9800; }
-.tier-c { border-left: 3px solid #4CAF50; }
-.tier-label { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
-.tier-label.a { color: #F44336; }
-.tier-label.b { color: #FF9800; }
-.tier-label.c { color: #4CAF50; }
-a { color: #42A5F5; text-decoration: none; }
-a:hover { text-decoration: underline; }
-.note { font-size: 12px; color: #777; margin-top: 4px; }
-.breaks-if { background: #2a1a1a; border: 1px solid #F44336; border-radius: 6px; padding: 10px 14px; margin: 8px 0; font-size: 12px; color: #ef9a9a; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f0f;color:#e0e0e0}
+.tabs{display:flex;border-bottom:2px solid #333;background:#1a1a1a;position:sticky;top:0;z-index:100}
+.tab{padding:14px 24px;cursor:pointer;color:#888;font-size:14px;font-weight:600;border-bottom:3px solid transparent;transition:all .2s}
+.tab:hover{color:#ccc}.tab.active{color:#42A5F5;border-bottom-color:#42A5F5}
+.tab-content{display:none;padding:30px;max-width:1300px;margin:0 auto}.tab-content.active{display:block}
+.placeholder{text-align:center;padding:100px 40px;color:#555}
+.placeholder h2{font-size:2em;margin-bottom:10px;color:#444}
+h1{font-size:2.2em;margin-bottom:8px;color:#fff}
+h2{font-size:1.5em;margin:30px 0 12px;color:#42A5F5;border-bottom:1px solid #333;padding-bottom:6px}
+h3{font-size:1.15em;margin:18px 0 6px;color:#90CAF9}
+p,li{line-height:1.6;margin-bottom:8px;color:#ccc}
+ul{margin-left:20px}
+.pitch{font-size:1.1em;color:#fff;background:#1e1e1e;padding:16px 20px;border-left:4px solid #42A5F5;border-radius:4px;margin:16px 0}
+.season{background:#1a1a1a;border-radius:10px;padding:20px;margin:20px 0;border:1px solid #2a2a2a}
+.season-title{font-size:1.3em;font-weight:700;color:#FF7043;margin-bottom:4px}
+.season-puzzle{font-style:italic;color:#aaa;margin-bottom:6px}
+.season-arc{font-size:13px;color:#888;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}
+th{background:#252525;padding:7px 8px;text-align:left;color:#aaa;border-bottom:2px solid #333;font-weight:600;position:sticky;top:50px}
+td{padding:7px 8px;border-bottom:1px solid #222;vertical-align:top}
+tr:hover{background:#1e1e1e}
+.tier-a{border-left:3px solid #F44336}.tier-b{border-left:3px solid #FF9800}.tier-c{border-left:3px solid #4CAF50}
+.tier-label{font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:1px}
+.tier-label.a{color:#F44336}.tier-label.b{color:#FF9800}.tier-label.c{color:#4CAF50}
+a{color:#42A5F5;text-decoration:none}a:hover{text-decoration:underline}
+.note{font-size:12px;color:#777;margin-top:4px}
+.verdict{border-radius:6px;padding:12px 14px;margin:10px 0;font-size:13px}
+.verdict-ok{background:#1a2a1a;border:1px solid #4CAF50;color:#a5d6a7}
+.verdict-risk{background:#2a2a1a;border:1px solid #FF9800;color:#ffe0b2}
+.verdict-break{background:#2a1a1a;border:1px solid #F44336;color:#ef9a9a}
+.verdict strong{display:block;margin-bottom:4px}
 </style>
 <script>
-function showTab(n) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab')[n].classList.add('active');
-    document.querySelectorAll('.tab-content')[n].classList.add('active');
-}
+function showTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab')[n].classList.add('active');document.querySelectorAll('.tab-content')[n].classList.add('active')}
 </script>
 </head>
 <body>
-
 <div class="tabs">
-    <div class="tab active" onclick="showTab(0)">Concept 1: Frontier</div>
-    <div class="tab" onclick="showTab(1)">Concept 2</div>
-    <div class="tab" onclick="showTab(2)">Concept 3</div>
-    <div class="tab" onclick="showTab(3)">Concept 4</div>
-    <div class="tab" onclick="showTab(4)">Concept 5</div>
+<div class="tab active" onclick="showTab(0)">Concept 1: Frontier</div>
+<div class="tab" onclick="showTab(1)">Concept 2</div>
+<div class="tab" onclick="showTab(2)">Concept 3</div>
+<div class="tab" onclick="showTab(3)">Concept 4</div>
+<div class="tab" onclick="showTab(4)">Concept 5</div>
 </div>
 
-<!-- CONCEPT 1: FRONTIER -->
 <div class="tab-content active">
-
 <h1>Frontier</h1>
-<div class="pitch">
-Every episode opens with a single quantitative puzzle anyone can follow in their head. The founder living inside the answer explains how it got there and where it leads.
-</div>
+<div class="pitch">Every episode opens with a single quantitative puzzle anyone can follow in their head. The founder living inside the answer explains how it got there and where it leads.</div>
+<p>Format: 2x/month continuous, 90-150 min. Occasional 4-episode limited arcs released weekly. First 20 episodes: puzzles are always quantitative.</p>
+<p>Guests are tiered: <span class="tier-label a">Tier A</span> = dream guest, episode built around them. <span class="tier-label b">Tier B</span> = strong alternate, works with slight reframing. <span class="tier-label c">Tier C</span> = available backup, concept holds.</p>
 
-<p>Format: 2x/month, 90-150 minutes. Occasional 4-episode limited arcs released weekly. Strict rule for first 20 episodes: puzzles are always quantitative.</p>
-
-<h2>Season Guide & Guest Tiers</h2>
-<p>Each season focuses on one frontier. Guests are tiered: <span class="tier-label a">Tier A</span> = dream guest, the episode is built around them. <span class="tier-label b">Tier B</span> = strong alternate, episode works with slight reframing. <span class="tier-label c">Tier C</span> = available backup, concept still holds.</p>
-<p class="note">The "Breaks if..." note on each season identifies whether the concept survives without the Tier A guest.</p>
-
-<!-- SEASON 1: COMPUTE -->
+<!-- SEASON 1: COMPUTE + ENERGY (combined) -->
 <div class="season">
-<div class="season-title">Season 1: Frontier of Compute</div>
-<div class="season-puzzle">"What does AI cost in 2030 if Liang Wenfeng is right?"</div>
-<p>4-episode arc: Cost curve &rarr; chip layer &rarr; capital structure of frontier labs &rarr; competitive landscape + resolution.</p>
+<div class="season-title">Season 1: Frontier of Compute & Energy</div>
+<div class="season-puzzle">"What does AI cost in 2030, and where does the power physically come from?"</div>
+<div class="season-arc">6-episode arc: AI cost curve &rarr; chip supply &rarr; chip geopolitics &rarr; energy demand &rarr; energy sources &rarr; resolution. Compute and energy are two sides of the same constraint: you can't scale AI without solving both simultaneously.</div>
 
 <table>
-<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>X Followers</th><th>Location</th><th>Why</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jensen Huang</strong><br>CEO, NVIDIA</td><td>"How many transistors does it take to match one human synapse, and how fast is that ratio changing?"</td><td><a href="https://x.com/nvidia" target="_blank">@nvidia</a></td><td>~500K (corp)</td><td>Santa Clara, CA</td><td>Sets the ceiling for compute supply. The puzzle doesn't work without the supply-side anchor.</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Liang Wenfeng</strong><br>CEO, DeepSeek</td><td>"DeepSeek trained a frontier model for 1/10th the cost. What happens to the AI industry if that ratio holds for 5 more years?"</td><td>N/A</td><td>N/A</td><td>Hangzhou, China</td><td>The cost-collapse thesis. The entire season arc hinges on whether his claim is real.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Chris Miller</strong><br>Author, Chip War</td><td>"If China blockades Taiwan tomorrow, how many months of advanced chips does the West have?"</td><td><a href="https://x.com/crmiller1" target="_blank">@crmiller1</a></td><td>~180K</td><td>Boston, MA</td><td>Geopolitical layer. Works as a standalone episode even without Jensen.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Dylan Patel</strong><br>SemiAnalysis</td><td>"How much does one GPU-hour cost today vs 3 years ago, and where does the curve go?"</td><td><a href="https://x.com/dylan522p" target="_blank">@dylan522p</a></td><td>~200K</td><td>San Francisco, CA</td><td>The most-cited semiconductor analyst. Can carry the chip layer episode if Miller is unavailable.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Dario Amodei</strong><br>CEO, Anthropic</td><td>"What's the capital cost of a frontier model today, and what does the learning curve say it'll be in 2030?"</td><td><a href="https://x.com/DarioAmodei" target="_blank">@DarioAmodei</a></td><td>~350K</td><td>San Francisco, CA</td><td>Demand-side anchor. Can substitute for Liang if DeepSeek access is impossible.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Demis Hassabis</strong><br>CEO, DeepMind</td><td>"How many parameters does it take to solve protein folding, and what does that say about intelligence?"</td><td><a href="https://x.com/demaboratoryishassabis" target="_blank">@demishassabis</a></td><td>~300K</td><td>London, UK</td><td>Alternative frontier-lab leader. Different angle (science) but same cost-curve relevance.</td></tr>
+<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th><th>Role in Arc</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jensen Huang</strong><br>CEO, NVIDIA</td><td>"How many transistors does it take to match one human synapse, and how fast is that ratio changing?"</td><td><a href="https://x.com/nvidia">@nvidia</a></td><td>500K (corp)</td><td>Santa Clara, CA</td><td>Sets the compute supply ceiling</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Liang Wenfeng</strong><br>CEO, DeepSeek</td><td>"DeepSeek trained a frontier model for 1/10th the cost. What if that ratio holds for 5 more years?"</td><td>N/A</td><td>N/A</td><td>Hangzhou, China</td><td>The cost-collapse thesis</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Sam Altman</strong><br>CEO, OpenAI</td><td>"OpenAI's compute demand doubles every X months. Where does the electricity come from?"</td><td><a href="https://x.com/sama">@sama</a></td><td>3.5M</td><td>San Francisco, CA</td><td>Demand side. Also invested in Helion (fusion)</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Casey Handmer</strong><br>CEO, Terraform Industries</td><td>"If everyone has an AGI in their pocket, how much energy does humanity need?"</td><td><a href="https://x.com/CaseyHandmer">@CaseyHandmer</a></td><td>120K</td><td>Los Angeles, CA</td><td>Contrarian solar thesis. Proven on Dwarkesh + Relentless</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Chris Miller</strong><br>Author, Chip War</td><td>"If China blockades Taiwan, how many months of advanced chips does the West have?"</td><td><a href="https://x.com/crmiller1">@crmiller1</a></td><td>180K</td><td>Boston, MA</td><td>Geopolitics of chips</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Dylan Patel</strong><br>SemiAnalysis</td><td>"How much does one GPU-hour cost today vs 3 years ago, and where does the curve go?"</td><td><a href="https://x.com/dylan522p">@dylan522p</a></td><td>200K</td><td>San Francisco, CA</td><td>Most-cited semiconductor analyst. Can carry chip episode</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Dario Amodei</strong><br>CEO, Anthropic</td><td>"What's the capital cost of a frontier model today vs 2030?"</td><td><a href="https://x.com/DarioAmodei">@DarioAmodei</a></td><td>350K</td><td>San Francisco, CA</td><td>Demand-side substitute for Altman or Liang</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Brian Janous</strong><br>Fmr VP Energy, Microsoft</td><td>"How much does it cost to power a 1GW data center for a year?"</td><td><a href="https://x.com/BrianJanous">@BrianJanous</a></td><td>15K</td><td>Seattle, WA</td><td>Grid reality check</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>David Kirtley</strong><br>CEO, Helion Energy</td><td>"What year does fusion become cheaper than natural gas per kWh?"</td><td><a href="https://x.com/DavidKirtley">@DavidKirtley</a></td><td>5K</td><td>Everett, WA</td><td>Fusion timeline</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Demis Hassabis</strong><br>CEO, DeepMind</td><td>"How many parameters does it take to solve protein folding?"</td><td><a href="https://x.com/demishassabis">@demishassabis</a></td><td>300K</td><td>London, UK</td><td>Alternative frontier lab leader</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Jigar Shah</strong><br>Dir, DOE Loan Programs</td><td>"How much federal money has been deployed to new energy since the IRA?"</td><td><a href="https://x.com/JigarShahDC">@JigarShahDC</a></td><td>90K</td><td>Washington, DC</td><td>Policy/deployment angle</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Jacob DeWitte</strong><br>CEO, Oklo (SMR)</td><td>"What does a small modular reactor cost per MW, and how does that compare to a solar farm?"</td><td><a href="https://x.com/jacobdewitte">@jacobdewitte</a></td><td>15K</td><td>Santa Clara, CA</td><td>Nuclear/SMR angle</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Lisa Su</strong><br>CEO, AMD</td><td>"How close is AMD's AI chip performance to NVIDIA's, and what does the gap curve look like?"</td><td><a href="https://x.com/LisaSu">@LisaSu</a></td><td>200K</td><td>Santa Clara, CA</td><td>Compute competition angle. Substitutes for Jensen</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Nat Friedman</strong><br>Investor; fmr CEO GitHub</td><td>"How much compute did it take to train GPT-4 vs GPT-2, and what does that curve predict for GPT-6?"</td><td><a href="https://x.com/natfriedman">@natfriedman</a></td><td>250K</td><td>San Francisco, CA</td><td>Investor/builder perspective on compute scaling</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Peter Beck</strong><br>CEO, Rocket Lab</td><td>"How much energy does it take to put 1kg in orbit vs running a GPU for a year?"</td><td><a href="https://x.com/Peter_J_Beck">@Peter_J_Beck</a></td><td>150K</td><td>Long Beach, CA</td><td>Cross-domain wildcard</td></tr>
 </table>
-<div class="breaks-if">Breaks if: Can't get Jensen OR Liang. The cost-curve puzzle needs both the supply side (NVIDIA) and the demand disruption (DeepSeek). Chris Miller + Dylan Patel can carry a 2-episode version, but the 4-episode arc loses its central tension.</div>
+
+<div class="verdict verdict-ok">
+<strong>Verdict: Does NOT break without Tier A guests.</strong>
+This is the strongest season because the compute+energy story has so many credible voices. Dylan Patel + Brian Janous + Dario Amodei can carry a 4-episode version that's nearly as compelling. Chris Miller works as a standalone episode regardless. The combined season means you have 15 guest options instead of needing specific people for separate compute and energy arcs. Jensen and Liang are dream gets that would make it exceptional, but the puzzle ("what does AI cost in 2030?") can be answered from multiple angles without them.
+</div>
 </div>
 
-<!-- SEASON 2: ENERGY -->
+<!-- SEASON 2: DEFENSE -->
 <div class="season">
-<div class="season-title">Season 2: Frontier of Energy</div>
-<div class="season-puzzle">"If AI scales the way the labs project, where does the power physically come from by 2030?"</div>
-<p>4-episode arc: Demand &rarr; grid &rarr; new sources &rarr; geopolitics + resolution.</p>
-
-<table>
-<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>X Followers</th><th>Location</th><th>Why</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Sam Altman</strong><br>CEO, OpenAI (+ Helion investor)</td><td>"OpenAI's compute demand doubles every X months. Where does the electricity come from?"</td><td><a href="https://x.com/sama" target="_blank">@sama</a></td><td>~3.5M</td><td>San Francisco, CA</td><td>Personifies AI demand. Also invested in Helion (fusion), so bridges demand to supply.</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Casey Handmer</strong><br>CEO, Terraform Industries</td><td>"If everyone has an AGI in their pocket, how much energy does humanity need?"</td><td><a href="https://x.com/CaseyHandmer" target="_blank">@CaseyHandmer</a></td><td>~120K</td><td>Los Angeles, CA</td><td>The contrarian solar thesis. Already proven on Dwarkesh and Relentless. Great on camera.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Brian Janous</strong><br>Fmr VP Energy, Microsoft</td><td>"How much does it cost to power a 1GW data center for a year, and who pays?"</td><td><a href="https://x.com/BrianJanous" target="_blank">@BrianJanous</a></td><td>~15K</td><td>Seattle, WA</td><td>Grid reality check. Knows where the bottlenecks actually are.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>David Kirtley</strong><br>CEO, Helion Energy</td><td>"What year does fusion become cheaper than natural gas per kWh?"</td><td><a href="https://x.com/DavidKirtley" target="_blank">@DavidKirtley</a></td><td>~5K</td><td>Everett, WA</td><td>Fusion timeline. The puzzle resolves differently depending on whether Helion delivers.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Jigar Shah</strong><br>Dir, DOE Loan Programs</td><td>"How much federal money has been deployed to new energy since the IRA, and what's the ROI?"</td><td><a href="https://x.com/JigarShahDC" target="_blank">@JigarShahDC</a></td><td>~90K</td><td>Washington, DC</td><td>Policy/deployment angle. Can substitute for grid episode.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Peter Beck</strong><br>CEO, Rocket Lab</td><td>"How much energy does it take to put 1kg in orbit, and how does that compare to running a GPU for a year?"</td><td><a href="https://x.com/Peter_J_Beck" target="_blank">@Peter_J_Beck</a></td><td>~150K</td><td>Long Beach, CA</td><td>Cross-domain puzzle. Energy viewed through the space lens. Works as a wildcard episode.</td></tr>
-</table>
-<div class="breaks-if">Breaks if: Can't get Altman. The demand-side puzzle needs someone who sets the demand. Casey Handmer can carry the solar thesis alone, and Brian Janous covers the grid, so a 3-episode version works without Altman.</div>
-</div>
-
-<!-- SEASON 3: DEFENSE -->
-<div class="season">
-<div class="season-title">Season 3: Frontier of Defense</div>
+<div class="season-title">Season 2: Frontier of Defense</div>
 <div class="season-puzzle">"What does it cost to defend a country against autonomous warfare in 2035?"</div>
-<p>4-episode arc: Threat &rarr; supply chain &rarr; doctrine &rarr; math + resolution.</p>
+<div class="season-arc">4-episode arc: Threat landscape &rarr; manufacturing at speed &rarr; doctrine &rarr; math + resolution.</div>
 
 <table>
-<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>X Followers</th><th>Location</th><th>Why</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Palmer Luckey</strong><br>Founder, Anduril</td><td>"How long does it take Lockheed to build an autonomous weapons factory? How long did Anduril take?"</td><td><a href="https://x.com/PalmerLuckey" target="_blank">@PalmerLuckey</a></td><td>~631K</td><td>Orange County, CA</td><td>The central character. Anduril IS the thesis that defense can move at startup speed.</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Sarah Paine</strong><br>Naval War College historian</td><td>"In every major war since 1850, what percentage were won by the side with more industrial capacity?"</td><td>N/A</td><td>N/A</td><td>Newport, RI</td><td>The historical layer. Her Dwarkesh episodes are the most-viewed on the channel. Proven draw.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Soren Monroe-Anderson</strong><br>CEO, Neros Technologies</td><td>"How many drones can the US manufacture per year today vs how many Ukraine uses per month?"</td><td><a href="https://x.com/soren_ma" target="_blank">@soren_ma</a></td><td>~5K</td><td>Los Angeles, CA</td><td>On-the-ground drone manufacturing. Already great on Relentless. The production-reality guest.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Chris Miller</strong><br>Author, Chip War</td><td>"What fraction of the Pentagon's budget goes to software vs hardware, and is that ratio changing?"</td><td><a href="https://x.com/crmiller1" target="_blank">@crmiller1</a></td><td>~180K</td><td>Boston, MA</td><td>Supply chain layer. Chip War credibility extends to defense procurement.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Andrew Bustamante</strong><br>Former CIA officer</td><td>"What does it cost to surveil one person for a year with human agents vs autonomous systems?"</td><td><a href="https://x.com/EverydaySpy" target="_blank">@EverydaySpy</a></td><td>~200K</td><td>Austin, TX</td><td>Intelligence angle. Already proven on DOAC. Brings the human/doctrine side.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Trae Stephens</strong><br>Co-founder, Anduril; Partner, Founders Fund</td><td>"What's the cost-per-kill ratio of a Javelin missile vs an autonomous drone swarm?"</td><td><a href="https://x.com/traestephens" target="_blank">@traestephens</a></td><td>~50K</td><td>San Francisco, CA</td><td>VC + defense operator. Can substitute for Palmer with a more analytical angle.</td></tr>
+<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th><th>Role in Arc</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Palmer Luckey</strong><br>Founder, Anduril</td><td>"How long does it take Lockheed to build an autonomous weapons factory? Anduril? ~8 years vs 6 months."</td><td><a href="https://x.com/PalmerLuckey">@PalmerLuckey</a></td><td>631K</td><td>Orange County, CA</td><td>Central character. Anduril IS the thesis</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Sarah Paine</strong><br>Naval War College historian</td><td>"In every major war since 1850, what % were won by the side with more industrial capacity?"</td><td>N/A</td><td>N/A</td><td>Newport, RI</td><td>Historical layer. Proven viral draw on Dwarkesh</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Dino Mavrookas</strong><br>CEO, Saronic (autonomous ships)</td><td>"How long did it take Saronic to build its first autonomous warship vs the Navy's last destroyer?"</td><td><a href="https://x.com/DinoMav">@DinoMav</a></td><td>~5K</td><td>Austin, TX</td><td>Naval/maritime defense. Ex-SEAL Team Six, Wharton MBA</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Soren Monroe-Anderson</strong><br>CEO, Neros Technologies</td><td>"How many drones can the US manufacture per year vs how many Ukraine uses per month?"</td><td><a href="https://x.com/soren_ma">@soren_ma</a></td><td>5K</td><td>Los Angeles, CA</td><td>Drone manufacturing reality. Proven on Relentless</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Brandon Tseng</strong><br>Co-founder, Shield AI</td><td>"How many autonomous missions has Shield AI's Hivemind completed, and what's the failure rate?"</td><td><a href="https://x.com/brandontseng">@brandontseng</a></td><td>~10K</td><td>San Diego, CA</td><td>Autonomous AI for defense. $5.3B valuation</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Chris Miller</strong><br>Author, Chip War</td><td>"What fraction of the Pentagon's budget goes to software vs hardware?"</td><td><a href="https://x.com/crmiller1">@crmiller1</a></td><td>180K</td><td>Boston, MA</td><td>Supply chain / procurement layer</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Trae Stephens</strong><br>Co-founder, Anduril; Partner, Founders Fund</td><td>"What's the cost-per-kill of a Javelin missile vs an autonomous drone swarm?"</td><td><a href="https://x.com/traestephens">@traestephens</a></td><td>50K</td><td>San Francisco, CA</td><td>VC + defense operator. Substitute for Palmer</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Andy Lapsa</strong><br>CEO, Epirus</td><td>"How much does it cost to shoot down one drone with a missile vs with a microwave beam?"</td><td><a href="https://x.com/Epaboratoryirus">@EpirusInc</a></td><td>~10K (corp)</td><td>Los Angeles, CA</td><td>Counter-drone tech. $1B+ valuation</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Adam Bry</strong><br>CEO, Skydio</td><td>"How many autonomous reconnaissance hours has Skydio logged for the US military?"</td><td><a href="https://x.com/adambry">@adambry</a></td><td>~5K</td><td>San Mateo, CA</td><td>Autonomous ISR. $2.2B valuation</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Andrew Bustamante</strong><br>Former CIA officer</td><td>"What does it cost to surveil one person for a year with human agents vs autonomous systems?"</td><td><a href="https://x.com/EverydaySpy">@EverydaySpy</a></td><td>200K</td><td>Austin, TX</td><td>Intelligence/human doctrine angle. Proven on DOAC</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Katherine Boyle</strong><br>GP, a16z (American Dynamism)</td><td>"What percentage of defense VC dollars go to software vs hardware startups?"</td><td><a href="https://x.com/KatBoyle">@KatBoyle</a></td><td>60K</td><td>Washington, DC</td><td>VC lens on defense tech</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Mike Brown</strong><br>Fmr Dir, Defense Innovation Unit</td><td>"How long does it take a startup's product to go from demo to deployed with the DoD?"</td><td><a href="https://x.com/MikeBrownDIU">@MikeBrownDIU</a></td><td>~8K</td><td>Mountain View, CA</td><td>Procurement/policy bridge</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Christian Brose</strong><br>Author, The Kill Chain; Anduril CSO</td><td>"How many steps are in the Pentagon's acquisition process, and how many does Anduril skip?"</td><td><a href="https://x.com/CDBrose">@CDBrose</a></td><td>~20K</td><td>Washington, DC</td><td>Doctrine/strategy author. Can carry the institutional angle</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Olaf Hichwa</strong><br>CTO, Neros Technologies</td><td>"How many design iterations does it take to build a China-free FPV drone?"</td><td>N/A</td><td>N/A</td><td>Los Angeles, CA</td><td>Engineering deep-dive. Proven on Relentless</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Annie Jacobsen</strong><br>Author, nuclear/intelligence</td><td>"What's the timeline from a nuclear launch order to detonation, and has AI changed it?"</td><td><a href="https://x.com/AnnieJacobsen">@AnnieJacobsen</a></td><td>~100K</td><td>Los Angeles, CA</td><td>Escalation/nuclear angle. Already on DOAC</td></tr>
 </table>
-<div class="breaks-if">Breaks if: Can't get Palmer Luckey. He IS the Anduril story. Trae Stephens + Soren Monroe-Anderson can tell the same thesis from different angles, but the narrative punch drops significantly. Sarah Paine is independent and could carry her episode regardless.</div>
+
+<div class="verdict verdict-ok">
+<strong>Verdict: Does NOT break without Tier A guests.</strong>
+Defense tech has an unusually deep bench of compelling founders who are willing to talk publicly. Trae Stephens can substitute for Palmer Luckey (same company, more analytical). Soren Monroe-Anderson and Brandon Tseng are strong standalone episodes. Sarah Paine is independent and available. The season works with any 4 of the 15 guests.
+</div>
 </div>
 
-<!-- SEASON 4: BIOTECH / GENOME -->
+<!-- SEASON 3: BIOLOGY -->
 <div class="season">
-<div class="season-title">Season 4: Frontier of Biology</div>
+<div class="season-title">Season 3: Frontier of Biology</div>
 <div class="season-puzzle">"How much does it cost to edit a human genome today vs the year the FDA wrote its rules?"</div>
-<p>4-episode arc: Cost curve &rarr; applications &rarr; regulation &rarr; ethics + resolution.</p>
+<div class="season-arc">4-episode arc: Cost curve of gene editing &rarr; applications (disease, food, longevity) &rarr; regulation vs reality &rarr; ethics + resolution.</div>
 
 <table>
-<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>X Followers</th><th>Location</th><th>Why</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>George Church</strong><br>Professor, Harvard; pioneer of genome editing</td><td>"How much does it cost to edit a human genome today vs when the FDA wrote its rules? ~$1,000 vs ~$3B."</td><td><a href="https://x.com/geochurch" target="_blank">@geochurch</a></td><td>~90K</td><td>Boston, MA</td><td>The godfather. Bridges cost curve, applications, and ethics in one person.</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Patrick Collison</strong><br>CEO, Stripe; co-founder, Arc Institute</td><td>"How many years does it take to get a new drug approved, and how has that changed since 1960?"</td><td><a href="https://x.com/patrickc" target="_blank">@patrickc</a></td><td>~1.2M</td><td>San Francisco, CA</td><td>The regulation-as-bottleneck angle. Arc Institute is his bet on fixing biomedical research.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Emily Leproust</strong><br>CEO, Twist Bioscience</td><td>"How much does it cost to synthesize 1 million base pairs of DNA today vs 10 years ago?"</td><td><a href="https://x.com/ELeproust" target="_blank">@ELeproust</a></td><td>~15K</td><td>South San Francisco, CA</td><td>The DNA synthesis cost curve. Equivalent to Moore's Law for biology.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Noor Siddiqui</strong><br>CEO, Orchid</td><td>"What percentage of disease risk is genetic, and how much can embryo screening reduce it?"</td><td><a href="https://x.com/NoorSiddiqui_" target="_blank">@NoorSiddiqui_</a></td><td>~20K</td><td>San Francisco, CA</td><td>The consumer-facing application. Already on Relentless. Young, compelling founder.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Jason Kelly</strong><br>CEO, Ginkgo Bioworks</td><td>"How many organisms can Ginkgo engineer per year, and what does that cost curve look like?"</td><td><a href="https://x.com/jrkelly" target="_blank">@jrkelly</a></td><td>~25K</td><td>Boston, MA</td><td>Synthetic biology platform. Different angle than genome editing but same cost-curve story.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Vijay Pande</strong><br>GP, a16z Bio</td><td>"What fraction of a16z's bio fund goes to AI-first companies vs traditional biotech?"</td><td><a href="https://x.com/viaboratoryjaypande" target="_blank">@vijaypande</a></td><td>~40K</td><td>Menlo Park, CA</td><td>The VC lens on bio. Can frame the investment thesis if founder access is limited.</td></tr>
+<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th><th>Role in Arc</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>George Church</strong><br>Professor, Harvard; genome pioneer</td><td>"Genome editing: ~$3B when FDA wrote its rules vs ~$1,000 today. The regulation assumes a world that no longer exists."</td><td><a href="https://x.com/geochurch">@geochurch</a></td><td>90K</td><td>Boston, MA</td><td>The godfather. Spans cost curve, applications, and ethics</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Patrick Collison</strong><br>CEO, Stripe; Co-founder, Arc Institute</td><td>"How many years does it take to get a new drug approved, and how has that changed since 1960?"</td><td><a href="https://x.com/patrickc">@patrickc</a></td><td>1.2M</td><td>San Francisco, CA</td><td>Regulation-as-bottleneck. Arc is his bet on fixing biomed</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jennifer Doudna</strong><br>Nobel laureate; CRISPR co-inventor</td><td>"How many diseases could CRISPR theoretically cure, and how many has it actually been approved for?"</td><td>N/A</td><td>N/A</td><td>Berkeley, CA</td><td>The inventor. Maximum credibility on the cost curve</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Emily Leproust</strong><br>CEO, Twist Bioscience</td><td>"How much does it cost to synthesize 1M base pairs of DNA today vs 10 years ago?"</td><td><a href="https://x.com/ELeproust">@ELeproust</a></td><td>15K</td><td>South San Francisco, CA</td><td>DNA synthesis cost curve = Moore's Law for biology</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Samarth Kulkarni</strong><br>CEO, CRISPR Therapeutics</td><td>"Casgevy is the first approved CRISPR therapy. What did it cost to develop, and what's the next one?"</td><td><a href="https://x.com/SamarthKulkarni">@SamarthKulkarni</a></td><td>~5K</td><td>Cambridge, MA</td><td>First approved CRISPR therapy. The proof it works</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Noor Siddiqui</strong><br>CEO, Orchid</td><td>"What % of disease risk is genetic, and how much can embryo screening reduce it?"</td><td><a href="https://x.com/NoorSiddiqui_">@NoorSiddiqui_</a></td><td>20K</td><td>San Francisco, CA</td><td>Consumer application. Young, compelling. Already on Relentless</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jason Kelly</strong><br>CEO, Ginkgo Bioworks</td><td>"How many organisms can Ginkgo engineer per year, and what does that cost?"</td><td><a href="https://x.com/jrkelly">@jrkelly</a></td><td>25K</td><td>Boston, MA</td><td>Synthetic biology platform. Different angle than gene editing</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Devyn Smith</strong><br>CEO, Intellia Therapeutics</td><td>"How many genetic diseases could in-vivo CRISPR treat without extracting cells from the patient?"</td><td>N/A</td><td>N/A</td><td>Cambridge, MA</td><td>In-vivo gene editing. Next frontier after Casgevy</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>David Meek</strong><br>CEO, Beam Therapeutics</td><td>"Base editing changes one DNA letter without cutting the strand. What does that precision cost?"</td><td>N/A</td><td>N/A</td><td>Cambridge, MA</td><td>Base editing = next-gen CRISPR. More precise, fewer risks</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Rachel Haurwitz</strong><br>CEO, Caribou Biosciences</td><td>"How many cell therapy treatments can be manufactured per year, and what's the bottleneck?"</td><td><a href="https://x.com/rhaurwitz">@rhaurwitz</a></td><td>~5K</td><td>Berkeley, CA</td><td>Manufacturing scale of gene therapies. Doudna co-founder</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Vijay Pande</strong><br>GP, a16z Bio</td><td>"What fraction of a16z's bio fund goes to AI-first vs traditional biotech?"</td><td><a href="https://x.com/vijaypande">@vijaypande</a></td><td>40K</td><td>Menlo Park, CA</td><td>VC lens on bio if founder access limited</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Bryan Johnson</strong><br>Founder, Blueprint (longevity)</td><td>"How much does it cost per year to reverse your biological age by 5 years?"</td><td><a href="https://x.com/bryan_johnson">@bryan_johnson</a></td><td>700K</td><td>Los Angeles, CA</td><td>Consumer longevity application. High-profile, polarizing</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>David Sinclair</strong><br>Professor, Harvard; longevity researcher</td><td>"In the lab, cells appeared 75% younger after 8 weeks. What would that mean at human scale?"</td><td><a href="https://x.com/davidasinclair">@davidasinclair</a></td><td>600K</td><td>Boston, MA</td><td>Aging reversal. Already huge on DOAC</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Rhonda Patrick</strong><br>FoundMyFitness; biomedical scientist</td><td>"What's the most cost-effective biomarker panel for predicting disease 10 years out?"</td><td><a href="https://x.com/foundmyfitness">@foundmyfitness</a></td><td>350K</td><td>San Diego, CA</td><td>Health optimization bridge. Huge existing audience</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Lada Nuzhna</strong><br>CEO, Turn Bio (epigenetic medicines)</td><td>"What does it cost to treat one patient with epigenetic reprogramming?"</td><td>N/A</td><td>N/A</td><td>San Francisco, CA</td><td>Early-stage founder. Appeared on Relentless</td></tr>
 </table>
-<div class="breaks-if">Breaks if: Can't get George Church. He's the one person who spans the full $3B-to-$1K arc. Emily Leproust + Noor Siddiqui can cover cost curve + application, but the historical weight drops.</div>
+
+<div class="verdict verdict-risk">
+<strong>Verdict: Moderate risk without Tier A, but survivable.</strong>
+George Church is the single most important guest. He's the only person who spans the full $3B-to-$1K cost-curve arc in one conversation. Without him, the season needs 2-3 guests to cover the same ground (Emily Leproust for cost curve + Samarth Kulkarni for clinical proof + Noor Siddiqui for consumer application). Patrick Collison is replaceable by any regulation-focused guest. Jennifer Doudna would be extraordinary but is notoriously selective. The Tier B bench is deep enough that the season works, but loses its "one person tells the whole story" narrative power.
+</div>
 </div>
 
-<!-- SEASON 5: ROBOTICS -->
+<!-- SEASON 4: ROBOTICS -->
 <div class="season">
-<div class="season-title">Season 5: Frontier of Robotics</div>
+<div class="season-title">Season 4: Frontier of Robotics</div>
 <div class="season-puzzle">"How many hours of human labor does a humanoid robot need to learn a new task, and where is that number heading?"</div>
-<p>4-episode arc: State of art &rarr; manufacturing &rarr; deployment &rarr; economics + resolution.</p>
+<div class="season-arc">4-episode arc: State of the art &rarr; manufacturing &rarr; deployment &rarr; economics + resolution.</div>
 
 <table>
-<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>X Followers</th><th>Location</th><th>Why</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Brett Adcock</strong><br>CEO, Figure AI</td><td>"How many hours of training data does Figure 03 need to learn a new factory task?"</td><td><a href="https://x.com/adaboratorycock" target="_blank">@adcock</a></td><td>~150K</td><td>San Jose, CA</td><td>The humanoid race leader. Figure's $39B valuation makes this the central character.</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Bernt Bornich</strong><br>CEO, 1X Technologies</td><td>"What does it cost to lease a humanoid robot for a month, and at what price does it replace a human worker?"</td><td><a href="https://x.com/1aboratoryXTech" target="_blank">@1XTech</a></td><td>~50K (corp)</td><td>Palo Alto, CA / Oslo, Norway</td><td>Consumer robotics angle. NEO is the first robot you can actually buy. Already on Relentless.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Keller Rinaudo Cliffton</strong><br>CEO, Zipline</td><td>"How many autonomous deliveries has Zipline completed, and what does the cost-per-delivery curve look like?"</td><td><a href="https://x.com/kaboratoryrinaudo" target="_blank">@krinaudo</a></td><td>~10K</td><td>South San Francisco, CA</td><td>Proven autonomous deployment at scale. Already on Relentless. Different angle than humanoids.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Pieter Abbeel</strong><br>Professor, UC Berkeley; Co-founder, Covariant</td><td>"How many robot-hours of data does it take to teach a robot arm to pick up any object?"</td><td><a href="https://x.com/paboratoryabbeel" target="_blank">@paboratoryabbeel</a></td><td>~100K</td><td>Berkeley, CA</td><td>The academic anchor. Can explain the learning-curve math rigorously.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Marc Raibert</strong><br>Founder, Boston Dynamics</td><td>"How many iterations did it take to make a robot do a backflip, and what does that say about the pace of physical AI?"</td><td>N/A</td><td>N/A</td><td>Waltham, MA</td><td>The godfather of legged robots. Historical perspective if current founders are unavailable.</td></tr>
+<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th><th>Role in Arc</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Brett Adcock</strong><br>CEO, Figure AI ($39B valuation)</td><td>"How many hours of training data does Figure 03 need to learn a new factory task?"</td><td><a href="https://x.com/adcock">@adcock</a></td><td>150K</td><td>San Jose, CA</td><td>Humanoid race leader. Highest valuation</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Bernt Bornich</strong><br>CEO, 1X Technologies</td><td>"What does it cost to lease a humanoid robot per month, and at what price does it replace a human?"</td><td><a href="https://x.com/1XTech">@1XTech</a></td><td>50K (corp)</td><td>Palo Alto / Oslo</td><td>Consumer robotics. NEO = first robot you can buy</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jeff Cardenas</strong><br>CEO, Apptronik ($5.3B valuation)</td><td>"How many units of Apollo can Apptronik manufacture per year, and what's the unit economics?"</td><td><a href="https://x.com/Apptronik">@Apptronik</a></td><td>~15K (corp)</td><td>Austin, TX</td><td>Manufacturing scale of humanoids</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Keller Rinaudo Cliffton</strong><br>CEO, Zipline</td><td>"How many autonomous deliveries has Zipline completed, and what's the cost-per-delivery curve?"</td><td><a href="https://x.com/krinaudo">@krinaudo</a></td><td>10K</td><td>South San Francisco</td><td>Proven autonomous deployment at scale. Already on Relentless</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Geordie Rose</strong><br>CEO, Sanctuary AI</td><td>"What's the difference between a robot that mimics human motion and one that understands it?"</td><td><a href="https://x.com/GordieRose">@GordieRose</a></td><td>~5K</td><td>Vancouver, Canada</td><td>Cognition angle. Previously built quantum computers (D-Wave)</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Pieter Abbeel</strong><br>Prof, UC Berkeley; Co-founder, Covariant</td><td>"How many robot-hours of data to teach a robot arm to pick up any object?"</td><td><a href="https://x.com/paboratoryabbeel">@pabbeel</a></td><td>100K</td><td>Berkeley, CA</td><td>Academic anchor. Learning-curve math</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Karol Hausman</strong><br>Research Scientist, Google DeepMind; Co-founder, Physical Intelligence</td><td>"How close are we to a general-purpose robot foundation model?"</td><td><a href="https://x.com/kaaboratorylhausman">@karolhausman</a></td><td>~20K</td><td>San Francisco, CA</td><td>Foundation models for robotics. PI raised $400M+</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jonathan Hurst</strong><br>Co-founder & CTO, Agility Robotics</td><td>"How many Digits are deployed in warehouses today, and what tasks can they actually do?"</td><td><a href="https://x.com/jhurst">@jhurst</a></td><td>~5K</td><td>Corvallis, OR</td><td>The warehouse-first deployment strategy</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jim Fan</strong><br>Senior Research Scientist, NVIDIA</td><td>"How many simulated hours does it take to train a robot in NVIDIA's Omniverse vs real-world hours?"</td><td><a href="https://x.com/DrJimFan">@DrJimFan</a></td><td>300K</td><td>Santa Clara, CA</td><td>Simulation-to-real transfer. Massive Twitter following</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Marc Raibert</strong><br>Founder, Boston Dynamics</td><td>"How many iterations to make a robot do a backflip, and what does that say about physical AI?"</td><td>N/A</td><td>N/A</td><td>Waltham, MA</td><td>Godfather of legged robots. Historical perspective</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Alex Khitrov</strong><br>CEO, Miso Robotics (Flippy)</td><td>"How many burgers has Flippy cooked, and what did the error rate curve look like?"</td><td>N/A</td><td>N/A</td><td>Pasadena, CA</td><td>Food service robotics. Practical, narrow deployment story</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Peter Chen</strong><br>CEO, Covariant</td><td>"How many warehouse pick-and-place tasks can an AI robot handle vs a purpose-built machine?"</td><td>N/A</td><td>N/A</td><td>Emeryville, CA</td><td>Warehouse AI robotics. Practical economics</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Melonee Wise</strong><br>CEO, Agility Robotics</td><td>"What's the utilization rate of a Digit robot in an Amazon warehouse?"</td><td><a href="https://x.com/MeloneeWise">@MeloneeWise</a></td><td>~5K</td><td>Corvallis, OR</td><td>CEO perspective on deployment. Complements Hurst (CTO)</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Daniela Rus</strong><br>Director, MIT CSAIL</td><td>"How small can a useful robot be? What's the frontier of micro-robotics?"</td><td><a href="https://x.com/danielarus">@danielarus</a></td><td>~15K</td><td>Cambridge, MA</td><td>Academic perspective beyond humanoids</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Dennis Hong</strong><br>Professor, UCLA; founder RoMeLa</td><td>"What's the minimum number of actuators needed for a humanoid to be useful?"</td><td><a href="https://x.com/trajectory">@trajectory</a></td><td>~10K</td><td>Los Angeles, CA</td><td>Mechanical design fundamentals</td></tr>
 </table>
-<div class="breaks-if">Breaks if: Can't get Brett Adcock. He's the most visible humanoid founder. Bernt Bornich (1X) is the strongest alternate since NEO is the most consumer-visible robot. The concept holds with any two of the Tier A/B guests.</div>
+
+<div class="verdict verdict-ok">
+<strong>Verdict: Does NOT break without Tier A guests.</strong>
+Robotics has the deepest bench of any season. Figure, 1X, Apptronik, Agility, Sanctuary, Zipline, and Boston Dynamics are all viable anchor guests. The puzzle ("how many hours to learn a task?") works with ANY humanoid company. Jim Fan (300K followers, NVIDIA simulation) could carry an episode alone with his Twitter presence. Even without Brett Adcock, the season has 14 other guests who can tell the same story from different angles.
+</div>
 </div>
 
-<!-- SEASON 6: PRIVACY & CRYPTOGRAPHY -->
+<!-- SEASON 5: PRIVACY -->
 <div class="season">
-<div class="season-title">Season 6: Frontier of Privacy</div>
+<div class="season-title">Season 5: Frontier of Privacy</div>
 <div class="season-puzzle">"What does it cost to surveil one more conversation, at the margin?"</div>
-<p>4-episode arc: The math of surveillance &rarr; cryptographic defense &rarr; policy &rarr; resolution.</p>
+<div class="season-arc">4-episode arc: The math of surveillance &rarr; cryptographic defense &rarr; policy/law &rarr; resolution.</div>
 
 <table>
-<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>X Followers</th><th>Location</th><th>Why</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Moxie Marlinspike</strong><br>Creator of Signal</td><td>"What does it cost to surveil one more conversation, at the margin? Answer: rounding error."</td><td><a href="https://x.com/moxie" target="_blank">@moxie</a></td><td>~183K</td><td>San Francisco, CA</td><td>Built the most important privacy tool in the world. The puzzle IS his life's work.</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Edward Snowden</strong><br>Whistleblower</td><td>"How many people's communications can one NSA analyst monitor simultaneously today vs 2013?"</td><td><a href="https://x.com/Snowden" target="_blank">@Snowden</a></td><td>~6.5M</td><td>Moscow, Russia</td><td>The draw. Highest-profile privacy figure alive. Would make the episode go viral.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Brian Acton</strong><br>Co-founder, WhatsApp; Co-founder, Signal Foundation</td><td>"How many messages does Signal encrypt per day, and what does that cost per message?"</td><td><a href="https://x.com/brianacton" target="_blank">@brianacton</a></td><td>~80K</td><td>Mountain View, CA</td><td>The business side of privacy. Left WhatsApp/Meta over privacy principles. Great story.</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Matthew Green</strong><br>Professor, Johns Hopkins; cryptographer</td><td>"How many years until quantum computing breaks current encryption, and what replaces it?"</td><td><a href="https://x.com/matthew_d_green" target="_blank">@matthew_d_green</a></td><td>~200K</td><td>Baltimore, MD</td><td>The technical anchor. Can make cryptography accessible. Great Twitter presence.</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Alex Stamos</strong><br>Fmr CISO, Facebook; Stanford Internet Observatory</td><td>"How many zero-day exploits are actively being used by governments right now?"</td><td><a href="https://x.com/alexstamos" target="_blank">@alexstamos</a></td><td>~300K</td><td>Stanford, CA</td><td>The corporate/policy bridge. Understands both sides (big tech + security community).</td></tr>
+<tr><th>Tier</th><th>Guest</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th><th>Why</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Moxie Marlinspike</strong><br>Creator of Signal</td><td>"What does it cost to surveil one more conversation, at the margin? Answer: rounding error."</td><td><a href="https://x.com/moxie">@moxie</a></td><td>183K</td><td>San Francisco, CA</td><td>Built the most important privacy tool. The puzzle IS his work</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Edward Snowden</strong><br>Whistleblower</td><td>"How many people's comms can one NSA analyst monitor simultaneously today vs 2013?"</td><td><a href="https://x.com/Snowden">@Snowden</a></td><td>6.5M</td><td>Moscow, Russia</td><td>Highest-profile privacy figure. Would make the episode viral</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Vitalik Buterin</strong><br>Co-founder, Ethereum</td><td>"How many zero-knowledge proofs are verified on Ethereum per day, and what does each one prove?"</td><td><a href="https://x.com/VitalikButerin">@VitalikButerin</a></td><td>5.5M</td><td>Various (nomadic)</td><td>ZK proofs as privacy infrastructure. Massive reach</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Matthew Green</strong><br>Prof, Johns Hopkins; cryptographer</td><td>"How many years until quantum computing breaks current encryption?"</td><td><a href="https://x.com/matthew_d_green">@matthew_d_green</a></td><td>200K</td><td>Baltimore, MD</td><td>Technical anchor. Can make crypto accessible. Great on Twitter</td></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Brian Acton</strong><br>Co-founder, WhatsApp & Signal Foundation</td><td>"How many messages does Signal encrypt per day, and what does that cost per message?"</td><td><a href="https://x.com/brianacton">@brianacton</a></td><td>80K</td><td>Mountain View, CA</td><td>Left WhatsApp/Meta over privacy. Business side of privacy</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Alex Stamos</strong><br>Fmr CISO, Facebook; Stanford</td><td>"How many zero-day exploits are governments actively using right now?"</td><td><a href="https://x.com/alexstamos">@alexstamos</a></td><td>300K</td><td>Stanford, CA</td><td>Corporate/policy bridge. Both sides perspective</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Zooko Wilcox</strong><br>Founder, Zcash</td><td>"What does it cost to make one financial transaction completely private on a blockchain?"</td><td><a href="https://x.com/zoaboratoryoko">@zooko</a></td><td>~80K</td><td>Boulder, CO</td><td>Privacy coins. Practical implementation of ZK proofs</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Eva Galperin</strong><br>Director of Cybersecurity, EFF</td><td>"How many stalkerware apps are on the average phone, and what data do they exfiltrate?"</td><td><a href="https://x.com/evacide">@evacide</a></td><td>150K</td><td>San Francisco, CA</td><td>Consumer privacy. Bridges tech to real-world harm</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Alex Gladstein</strong><br>CSO, Human Rights Foundation</td><td>"In how many countries is using encryption illegal, and what happens to people who use it?"</td><td><a href="https://x.com/gladstein">@gladstein</a></td><td>250K</td><td>New York, NY</td><td>Human rights + privacy intersection. Global perspective</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Howard Luo</strong><br>CEO, Aleo (ZK blockchain)</td><td>"What's the compute cost of generating one zero-knowledge proof, and how is that curve changing?"</td><td><a href="https://x.com/howardwu">@howardwu</a></td><td>~30K</td><td>San Francisco, CA</td><td>ZK infrastructure. Practical ZK cost curve</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Bruce Schneier</strong><br>Security technologist & author</td><td>"How much does the average person's data sell for on the open market?"</td><td><a href="https://x.com/schneierblog">@schneierblog</a></td><td>250K</td><td>Cambridge, MA</td><td>The security guru. Can anchor any privacy discussion</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Bart Preneel</strong><br>Prof, KU Leuven; cryptographer</td><td>"How long would it take a quantum computer to break AES-256?"</td><td>N/A</td><td>N/A</td><td>Leuven, Belgium</td><td>European academic anchor on post-quantum crypto</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Alec Muffett</strong><br>Security researcher; fmr Facebook</td><td>"How many users does the Tor network have, and what's the ratio of legitimate to criminal use?"</td><td><a href="https://x.com/AlecMuffett">@AlecMuffett</a></td><td>~30K</td><td>London, UK</td><td>Onion routing + practical privacy engineering</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Cindy Cohn</strong><br>Executive Director, EFF</td><td>"How many government surveillance requests does the average tech company receive per year?"</td><td><a href="https://x.com/CindyCohn">@CindyCohn</a></td><td>~50K</td><td>San Francisco, CA</td><td>Legal/policy anchor. EFF has standing to discuss surveillance law</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Nic Carter</strong><br>Partner, Castle Island Ventures</td><td>"What fraction of global financial transactions are fully private today?"</td><td><a href="https://x.com/nic__carter">@nic__carter</a></td><td>250K</td><td>Cambridge, MA</td><td>Financial privacy / crypto policy angle</td></tr>
 </table>
-<div class="breaks-if">Breaks if: Can't get Moxie. The puzzle is literally his invention (Signal). Matthew Green + Brian Acton can carry the technical + business sides, but Moxie IS the narrative anchor. Snowden is a dream get but not essential.</div>
+
+<div class="verdict verdict-risk">
+<strong>Verdict: Moderate risk. Depends on Moxie.</strong>
+Moxie Marlinspike IS the puzzle ("what does surveillance cost at the margin?"). Without him, the season needs reframing around quantum threats (Matthew Green) or human rights (Gladstein + Galperin). Edward Snowden is a dream get but unrealistic for a new show. Vitalik Buterin is accessible and would bring massive reach, but his angle (ZK proofs on Ethereum) is more technical than visceral. The season works with Matthew Green + Alex Stamos + Eva Galperin, but the narrative simplicity of "one person built the answer" is lost.
+</div>
 </div>
 
 <h2>Additional Season Ideas (Not Yet Cast)</h2>
 <ul>
-<li><strong>Frontier of Education</strong> -- "How many hours does a kid need to learn a year of math?" (Max Ventilla, Sal Khan, Bloom's 2-sigma problem)</li>
-<li><strong>Frontier of Space</strong> -- "What does it cost to put 1kg in orbit in 2030?" (Peter Beck, Gwynne Shotwell, Tim Ellis)</li>
-<li><strong>Frontier of Manufacturing</strong> -- "What's the cost of making one thing in America vs China, and where is the crossover?" (Jim Belosic, SendCutSend; Hadrian; Bright Machines)</li>
-<li><strong>Frontier of Longevity</strong> -- "What's the cost per year of life extension today?" (Bryan Johnson, David Sinclair, Rhonda Patrick)</li>
-<li><strong>Frontier of Food</strong> -- "How many calories can a vertical farm produce per square foot vs a field?" (Plenty, Bowery, Impossible Foods)</li>
+<li><strong>Frontier of Education</strong> -- "How many hours does a kid need to learn a year of math? ~80, not ~1,000." (Max Ventilla, Sal Khan, Bloom's 2-sigma)</li>
+<li><strong>Frontier of Space</strong> -- "What does it cost to put 1kg in orbit in 2030?" (Peter Beck, Gwynne Shotwell, Eric Schmidt/Relativity)</li>
+<li><strong>Frontier of Manufacturing</strong> -- "What's the cost of making one thing in America vs China?" (Jim Belosic/SendCutSend, Hadrian, Bright Machines)</li>
+<li><strong>Frontier of Longevity</strong> -- "What's the cost per year of life extension?" (Bryan Johnson, David Sinclair, Rhonda Patrick)</li>
+<li><strong>Frontier of Food</strong> -- "How many calories can a vertical farm produce per sq ft vs a field?" (Plenty, Bowery, Impossible)</li>
 </ul>
+
+<h2>Overall Concept Resilience</h2>
+<table>
+<tr><th>Season</th><th>Tier A Critical?</th><th>Verdict</th><th>Bench Depth</th></tr>
+<tr><td>Compute & Energy</td><td>Nice to have, not required</td><td style="color:#a5d6a7">Survives</td><td>15 guests, 5+ viable episodes without any Tier A</td></tr>
+<tr><td>Defense</td><td>Palmer is important but replaceable</td><td style="color:#a5d6a7">Survives</td><td>15 guests, deep bench of defense tech founders</td></tr>
+<tr><td>Biology</td><td>George Church is hard to replace</td><td style="color:#ffe0b2">Moderate risk</td><td>15 guests, but no single person spans the full arc</td></tr>
+<tr><td>Robotics</td><td>Completely interchangeable</td><td style="color:#a5d6a7">Survives easily</td><td>15 guests, any humanoid company can anchor</td></tr>
+<tr><td>Privacy</td><td>Moxie is the narrative anchor</td><td style="color:#ffe0b2">Moderate risk</td><td>15 guests, but needs reframing without Moxie</td></tr>
+</table>
 
 <h2>Production Notes</h2>
 <ul>
 <li><strong>Set:</strong> Nerdy intellectual interior (books, whiteboards, puzzle printout on table). Cinematic exterior (DP-quality lighting, real lenses, color-graded).</li>
 <li><strong>Cold open:</strong> The puzzle. Always. 30-60 seconds of napkin math the viewer does in their head.</li>
-<li><strong>Kill criterion for puzzles:</strong> "The audience has not seen this before, and once they see it the world looks different."</li>
-<li><strong>What would kill it:</strong> Weak puzzles (math feels rigged) or founder availability (guests who resist the quantitative structure).</li>
+<li><strong>Kill criterion:</strong> "The audience has not seen this before, and once they see it the world looks different."</li>
+<li><strong>What would kill it:</strong> Weak puzzles (math feels rigged) or founder availability (guests who resist quantitative structure).</li>
 </ul>
 
 </div>
 
-<!-- CONCEPT 2 -->
-<div class="tab-content">
-<div class="placeholder">
-<h2>Concept 2</h2>
-<p>Placeholder for second podcast concept. Click to edit.</p>
-</div>
-</div>
-
-<!-- CONCEPT 3 -->
-<div class="tab-content">
-<div class="placeholder">
-<h2>Concept 3</h2>
-<p>Placeholder for third podcast concept. Click to edit.</p>
-</div>
-</div>
-
-<!-- CONCEPT 4 -->
-<div class="tab-content">
-<div class="placeholder">
-<h2>Concept 4</h2>
-<p>Placeholder for fourth podcast concept. Click to edit.</p>
-</div>
-</div>
-
-<!-- CONCEPT 5 -->
-<div class="tab-content">
-<div class="placeholder">
-<h2>Concept 5</h2>
-<p>Placeholder for fifth podcast concept. Click to edit.</p>
-</div>
-</div>
+<div class="tab-content"><div class="placeholder"><h2>Concept 2</h2><p>Placeholder for second podcast concept.</p></div></div>
+<div class="tab-content"><div class="placeholder"><h2>Concept 3</h2><p>Placeholder for third podcast concept.</p></div></div>
+<div class="tab-content"><div class="placeholder"><h2>Concept 4</h2><p>Placeholder for fourth podcast concept.</p></div></div>
+<div class="tab-content"><div class="placeholder"><h2>Concept 5</h2><p>Placeholder for fifth podcast concept.</p></div></div>
 
 </body>
 </html>
