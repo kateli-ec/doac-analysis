@@ -37,6 +37,17 @@ a{color:#42A5F5;text-decoration:none}a:hover{text-decoration:underline}
 .verdict-risk{background:#2a2a1a;border:1px solid #FF9800;color:#ffe0b2}
 .verdict strong{display:block;margin-bottom:4px}
 .chokepoint{color:#FF7043;font-weight:600}
+.act-header{font-size:1.05em;color:#FF7043;font-weight:700;margin:26px 0 10px;padding:10px 14px;background:#1e1612;border-left:4px solid #FF7043;border-radius:4px;letter-spacing:1.5px;text-transform:uppercase}
+.episode{background:#1b1b1b;border-radius:8px;padding:16px 18px;margin:12px 0;border-left:3px solid #90CAF9}
+.episode-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.episode-title{font-weight:700;color:#90CAF9;font-size:14.5px;flex:1;min-width:280px}
+.min-tier-badge{font-size:10.5px;color:#ddd;background:#111;padding:5px 10px;border-radius:4px;white-space:nowrap;border:1px solid #2a2a2a}
+.min-tier-badge .tier-label{margin-left:4px}
+.puzzle{background:#13202e;border-left:3px solid #42A5F5;padding:9px 12px;margin:6px 0;font-size:12.5px;border-radius:3px}
+.resolution{background:#142214;border-left:3px solid #4CAF50;padding:9px 12px;margin:6px 0;font-size:12.5px;border-radius:3px}
+.puzzle strong,.resolution strong{color:#fff;display:block;margin-bottom:4px;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.acts-summary{font-size:13px;color:#bbb;margin:10px 0 18px}
+.acts-summary b{color:#FF7043}
 </style>
 <script>
 function showTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab')[n].classList.add('active');document.querySelectorAll('.tab-content')[n].classList.add('active')}
@@ -58,113 +69,305 @@ function showTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.rem
 <p>Approach: Map the <span class="chokepoint">infrastructure stack</span> of each frontier. Identify who controls each chokepoint. Those people are the guests, because they have the most unique vantage point on the puzzle.</p>
 
 <!-- ============================================ -->
-<!-- SEASON 1: COMPUTE & ENERGY -->
+<!-- SEASON 1: FRONTIER OF ENERGY -->
 <!-- ============================================ -->
 <div class="season">
-<div class="season-title">Season 1: Frontier of Compute & Energy</div>
-<div class="season-puzzle">"What does AI cost in 2030, and where does the power physically come from?"</div>
-<p>Compute and energy are the same constraint. You can't scale AI without solving both. This season maps the full stack from silicon to socket.</p>
+<div class="season-title">Season 1: Frontier of Energy</div>
+<div class="season-puzzle">"America's grid was designed for flat demand and predictable supply. Around 2023 that world ended. What breaks?"</div>
+<p>16 episodes across 3 acts, bookended by a prologue and an epilogue. Every episode opens with a Frontier Puzzle — a quantitative question the audience can follow on a napkin — and resolves it through the person who lives inside the answer.</p>
+<p class="acts-summary"><b>Act I · Demand</b> (Eps 1–5): Who needs the power, how much, and why the forecasts broke. &nbsp;·&nbsp; <b>Act II · Supply</b> (Eps 6–12): Where the electrons come from and what each source actually costs. &nbsp;·&nbsp; <b>Act III · The System</b> (Eps 13–16): Who controls the grid, who trades the molecules, and who writes the rules.</p>
+<p style="font-size:13px;color:#999"><b>Guest tiers:</b> <span class="tier-label a">A</span> dream gets (season-defining, hardest to book) · <span class="tier-label b">B</span> strong gets (credible, accessible with effort) · <span class="tier-label c">C</span> reliable (excellent, readily available). <b>Min-to-air</b> = the lowest tier that still makes the episode worth cutting.</p>
 
-<h3>The Infrastructure Stack</h3>
+<!-- ============================ PROLOGUE ============================ -->
+<div class="act-header">Prologue — The Setup</div>
 
-<div class="stack">
-<div class="stack-title">Layer 1: Chip Design (who decides what gets built)</div>
-<div class="stack-q">Who designs the chips that AI runs on? Who controls the instruction set architecture?</div>
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 0 · "How Much Power Does America Actually Use?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>U.S. electricity demand grew ~0.5%/yr for 20 years (2005–2023), so grid planners built for ~4,200 TWh. In 2024 they doubled their 5-year forecasts overnight. At 3% annual growth, how many GW of new capacity has to come online by 2035 — and how does that compare to everything built in the last two decades combined?</div>
+<div class="resolution"><strong>Resolution</strong>Flat → 3% means ~1,200 TWh of additional demand by 2035. That requires ~300 GW of new nameplate capacity on top of ~1,300 GW installed today — roughly every gas and renewable MW added since 2000, built again in a decade. The system was designed for a world that no longer exists.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jensen Huang</strong><br>CEO, NVIDIA</td><td>Designs 95%+ of AI training chips</td><td>"How many transistors per human synapse, and how fast is that ratio changing?"</td><td><a href="https://x.com/nvidia">@nvidia</a></td><td>500K</td><td>Santa Clara, CA</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Lisa Su</strong><br>CEO, AMD</td><td>Only credible alternative to NVIDIA for AI chips</td><td>"How close is AMD's AI chip to NVIDIA's, and what does the gap curve look like?"</td><td><a href="https://x.com/LisaSu">@LisaSu</a></td><td>200K</td><td>Santa Clara, CA</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Rene Haas</strong><br>CEO, ARM</td><td>Controls the architecture that most AI inference chips are built on</td><td>"What fraction of all AI inference runs on ARM architecture vs x86?"</td><td><a href="https://x.com/ARM">@ARM</a></td><td>150K</td><td>Cambridge, UK</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jesse Jenkins</strong><br>Princeton, Net-Zero America lead</td><td>The academic everyone cites when modeling the new demand curve. Can frame the entire season.</td><td><a href="https://x.com/JesseJenkins">@JesseJenkins</a></td><td>60K</td><td>Princeton, NJ</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jason Bordoff</strong><br>Founding Dir, Columbia CGEP</td><td>Bridges academia and policy. Ran Obama energy policy. Writes the "what changed" pieces.</td><td><a href="https://x.com/JasonBordoff">@JasonBordoff</a></td><td>40K</td><td>New York, NY</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Melissa Lott</strong><br>Partner, Microsoft Energy; ex-CGEP</td><td>Translates the load-growth numbers for a general audience. Has run the EIA model.</td><td><a href="https://x.com/mclott">@mclott</a></td><td>15K</td><td>New York, NY</td></tr>
 </table>
 </div>
 
-<div class="stack">
-<div class="stack-title">Layer 2: Chip Fabrication (who physically makes the chips)</div>
-<div class="stack-q">One company makes 90%+ of the world's most advanced chips. What happens if they can't?</div>
+<!-- ============================ ACT I: DEMAND ============================ -->
+<div class="act-header">Act I · Demand — "Who Needs the Power?"</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 1 · "How Many Megawatts Does One AI Model Need?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>GPT-3 training used ~1,300 MWh. GPT-4 used ~10x that. If scaling laws hold, the next frontier model draws 100,000–500,000 MWh. Compressed into 6 months, that's a peak draw of ~380 MW — roughly one small nuclear reactor, dedicated. How many simultaneous GW-class training clusters exist by 2028?</div>
+<div class="resolution"><strong>Resolution</strong>Four to six. Each requires firm, 24/7 power in a ~1 GW block. The U.S. has never procured firm clean power at that speed. The constraint on AI isn't chips — it's watts, and the watts don't arrive on the schedule the labs need them.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>C.C. Wei</strong><br>Chairman & CEO, TSMC</td><td>Fabricates 90%+ of advanced chips globally. TIME 100 most influential 2026</td><td>"If TSMC's Taiwan fabs went offline, how many months until the world runs out of AI chips?"</td><td>N/A</td><td>N/A</td><td>Hsinchu, Taiwan</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Pat Gelsinger</strong><br>Fmr CEO, Intel (now advisor)</td><td>Led Intel's attempt to compete with TSMC. Knows why it's so hard</td><td>"How many billions does it cost to build a leading-edge fab, and why can only one company do it?"</td><td><a href="https://x.com/PGelsinger">@PGelsinger</a></td><td>200K</td><td>Portland, OR</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Chris Miller</strong><br>Author, Chip War; Tufts professor</td><td>Wrote the definitive book on semiconductor geopolitics</td><td>"If China blockades Taiwan, how many months of advanced chips does the West have?"</td><td><a href="https://x.com/crmiller1">@crmiller1</a></td><td>180K</td><td>Boston, MA</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Brian Janous</strong><br>Co-Founder, Cloverleaf Infra; fmr VP Energy, Microsoft</td><td>Built the hyperscaler energy procurement playbook. Now brokers the GW deals for frontier labs.</td><td><a href="https://x.com/BrianJanous">@BrianJanous</a></td><td>15K</td><td>Seattle, WA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Mark Russinovich</strong><br>CTO, Microsoft Azure</td><td>Owns the compute ↔ power translation inside the biggest training operator.</td><td><a href="https://x.com/markrussinovich">@markrussinovich</a></td><td>200K</td><td>Redmond, WA</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Dylan Patel</strong><br>Founder, SemiAnalysis</td><td>Publishes the GW-scale training cluster map. Will quote the numbers on air.</td><td><a href="https://x.com/dylan522p">@dylan522p</a></td><td>200K</td><td>San Francisco, CA</td></tr>
 </table>
 </div>
 
-<div class="stack">
-<div class="stack-title">Layer 3: The Chip Equipment Bottleneck</div>
-<div class="stack-q">One Dutch company makes the only machine that can print chips below 7nm. Everything depends on it.</div>
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 2 · "What Happens When Virginia Runs Out of Electricity?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Northern Virginia hosts ~12 GW of data center load — the entire peak demand of New Jersey, inside three counties. PJM's capacity auction cleared at $269.92/MW-day in 2025, up 833% in one year. A typical Dominion household uses ~12 MWh/yr. How many dollars per month does the average Virginia family now pay so AI can train next door?</div>
+<div class="resolution"><strong>Resolution</strong>~$15–25/month by 2027 on residential bills, rising. Dominion filed its first base rate case since 1992. The policy fight of the decade is who pays: data centers on a dedicated tariff, or everyone on socialized capacity costs.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Christophe Fouquet</strong><br>CEO, ASML</td><td>Makes the only EUV lithography machines in the world. Each costs $380M+</td><td>"How many EUV machines exist on Earth, and how long does it take to build one more?"</td><td>N/A</td><td>N/A</td><td>Veldhoven, Netherlands</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Dylan Patel</strong><br>SemiAnalysis</td><td>Most-cited semiconductor analyst. Maps the full supply chain</td><td>"How much does one GPU-hour cost today vs 3 years ago?"</td><td><a href="https://x.com/dylan522p">@dylan522p</a></td><td>200K</td><td>San Francisco, CA</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Manu Asthana</strong><br>CEO, PJM Interconnection</td><td>Runs the grid that broke. Can walk through the $269/MW-day auction minute by minute.</td><td>N/A</td><td>N/A</td><td>Valley Forge, PA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Bob Blue</strong><br>CEO, Dominion Energy</td><td>Filing the rate case. Building the gas + offshore wind to serve the DC belt.</td><td>N/A</td><td>N/A</td><td>Richmond, VA</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Joe Bowring</strong><br>President, Monitoring Analytics (PJM Market Monitor)</td><td>The independent referee of the PJM market. Will tell the unpleasant truths on record.</td><td>N/A</td><td>N/A</td><td>Eagleville, PA</td></tr>
 </table>
 </div>
 
-<div class="stack">
-<div class="stack-title">Layer 4: AI Training Demand (who consumes the compute)</div>
-<div class="stack-q">How much compute do frontier labs actually need, and what does the cost curve look like?</div>
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 3 · "How Many Factories Did America Announce vs. Actually Build?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Post-CHIPS and IRA, companies announced $500B+ in U.S. manufacturing investment. Of those projects, what fraction has broken ground? What fraction has a signed interconnection agreement? And how many GW of incremental industrial load is actually energized vs. paper?</div>
+<div class="resolution"><strong>Resolution</strong>Roughly 40% of announced capex is under construction, &lt;20% is energized. The reshoring boom is real on paper but rate-limited by the grid — median interconnection wait is now 5+ years. A factory announced in 2023 may not have power until 2030.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Liang Wenfeng</strong><br>CEO, DeepSeek</td><td>Proved frontier AI can be trained at 1/10th the cost. If true, reshapes the entire stack</td><td>"DeepSeek trained for 1/10th cost. What happens to the AI industry if that ratio holds?"</td><td>N/A</td><td>N/A</td><td>Hangzhou, China</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Dario Amodei</strong><br>CEO, Anthropic</td><td>Runs one of 3 frontier labs. Sets compute demand</td><td>"What's the capital cost of a frontier model today vs 2030?"</td><td><a href="https://x.com/DarioAmodei">@DarioAmodei</a></td><td>350K</td><td>San Francisco, CA</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Sam Altman</strong><br>CEO, OpenAI</td><td>Largest compute consumer. Also invested in Helion (fusion)</td><td>"OpenAI's compute demand doubles every X months. Where does the electricity come from?"</td><td><a href="https://x.com/sama">@sama</a></td><td>3.5M</td><td>San Francisco, CA</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Demis Hassabis</strong><br>CEO, DeepMind</td><td>Different approach: applies compute to science (AlphaFold) not just language</td><td>"How many parameters to solve protein folding, and what does that say about intelligence?"</td><td><a href="https://x.com/demishassabis">@demishassabis</a></td><td>300K</td><td>London, UK</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jigar Shah</strong><br>Fmr Dir, DOE Loan Programs Office</td><td>Saw every major project's financing. Knows exactly which ones will and won't get built.</td><td><a href="https://x.com/JigarShahDC">@JigarShahDC</a></td><td>90K</td><td>Washington, DC</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Keyvan Esfarjani</strong><br>EVP Manufacturing, Intel</td><td>Running the Ohio + Arizona fab builds — the poster-child reshoring projects with real grid drama.</td><td>N/A</td><td>N/A</td><td>Chandler, AZ</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Rick Cassidy</strong><br>Chairman, TSMC Arizona</td><td>Lives inside the single biggest reshoring project and its power-contract negotiations with APS.</td><td>N/A</td><td>N/A</td><td>Phoenix, AZ</td></tr>
 </table>
 </div>
 
-<div class="stack">
-<div class="stack-title">Layer 5: The Grid (who delivers the electrons)</div>
-<div class="stack-q">410,000 new megawatts are requesting grid connection in Texas alone. Who decides what gets connected?</div>
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 4 · "What Does It Cost to Electrify Everything in One House?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label c">Tier C</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>The average U.S. home uses ~10,500 kWh/yr of electricity plus ~750 therms of gas. Replace the furnace with a heat pump, the stove with induction, the water heater, and add one EV — electricity consumption roughly doubles to ~21,000 kWh/yr. If just 10% of U.S. homes do this by 2030, how many GW of new capacity does it require?</div>
+<div class="resolution"><strong>Resolution</strong>~140 TWh of new demand = ~40 GW of continuous new capacity — more than the entire installed nuclear fleet in PJM. Electrification is the quiet demand bomb under the noisy data-center story, and the binding constraint is the neighborhood transformer, not generation.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Pablo Vegas</strong><br>CEO, ERCOT (Texas grid operator)</td><td>Controls the largest deregulated grid in the US. 87% of new demand is data centers</td><td>"410,000 MW of new requests hit ERCOT. The current grid is 85,000 MW. What happens?"</td><td>N/A</td><td>N/A</td><td>Austin, TX</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Laura Swett</strong><br>Chairman, FERC</td><td>Regulates interstate electricity transmission. Controls interconnection queue nationally</td><td>"How many years does it take to get a new power plant connected to the grid today?"</td><td>N/A</td><td>N/A</td><td>Washington, DC</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>John Ketchum</strong><br>CEO, NextEra Energy</td><td>World's largest utility by market cap ($190B). Largest renewable energy producer</td><td>"How many GW of new generation does NextEra plan to build by 2030, and at what cost?"</td><td>N/A</td><td>N/A</td><td>Juno Beach, FL</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Chris Womack</strong><br>CEO, Southern Company</td><td>Largest utility in the Southeast. Building new nuclear (Vogtle)</td><td>"Vogtle cost $35B and took 7 years of delays. What did Southern Company learn?"</td><td>N/A</td><td>N/A</td><td>Atlanta, GA</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Brian Janous</strong><br>Fmr VP Energy, Microsoft</td><td>Led hyperscaler energy procurement. Knows where the real bottlenecks are</td><td>"How much does it cost to power a 1GW data center for a year?"</td><td><a href="https://x.com/BrianJanous">@BrianJanous</a></td><td>15K</td><td>Seattle, WA</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Saul Griffith</strong><br>Founder, Rewiring America</td><td>Wrote the book on household electrification. Has the national-scale numbers memorized.</td><td><a href="https://x.com/saulgriffith">@saulgriffith</a></td><td>30K</td><td>San Francisco, CA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Arch Rao</strong><br>CEO, Span</td><td>Smart panel company that sees real household load curves before and after electrification.</td><td><a href="https://x.com/archrao">@archrao</a></td><td>5K</td><td>San Francisco, CA</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Andy Frank</strong><br>Co-Founder, Sealed</td><td>Finances electrification retrofits. Has per-home cost and load data from thousands of conversions.</td><td><a href="https://x.com/andyfrank">@andyfrank</a></td><td>5K</td><td>New York, NY</td></tr>
 </table>
 </div>
 
-<div class="stack">
-<div class="stack-title">Layer 6: New Energy Sources (who breaks the grid bottleneck)</div>
-<div class="stack-q">If the grid can't scale fast enough, what goes around it?</div>
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 5 · "What's the Most Electricity-Intensive Thing Most People Have Never Heard Of?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label c">Tier C</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Bitcoin mining consumed ~45 TWh in the U.S. in 2024 — more than Washington state's total residential load. Green hydrogen at DOE's 10 MMT/yr target needs ~500 TWh of electricity alone. Desal, DAC, and indoor agriculture each sit in the 5–50 TWh range. Which of these "dark matter" loads grows fastest, and what's the 2030 total?</div>
+<div class="resolution"><strong>Resolution</strong>Green hydrogen dwarfs the others if it scales. At 10 MMT/yr it would consume ~12% of today's total U.S. grid — more than every data center in America combined. Whether it happens depends entirely on the 45V tax credit surviving the next two Congresses.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Casey Handmer</strong><br>CEO, Terraform Industries</td><td>Contrarian thesis: solar is already cheaper than everything and will power AI</td><td>"If everyone has an AGI in their pocket, how much energy does humanity need?"</td><td><a href="https://x.com/CaseyHandmer">@CaseyHandmer</a></td><td>120K</td><td>Los Angeles, CA</td></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>John Hopkins</strong><br>CEO, NuScale Power</td><td>Furthest along in US SMR deployment. TVA deal for 6GW</td><td>"When does the first commercial SMR deliver power, and what does the kWh cost?"</td><td>N/A</td><td>N/A</td><td>Portland, OR</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>David Kirtley</strong><br>CEO, Helion Energy</td><td>Closest to commercial fusion. Backed by Altman</td><td>"What year does fusion become cheaper than natural gas per kWh?"</td><td><a href="https://x.com/DavidKirtley">@DavidKirtley</a></td><td>5K</td><td>Everett, WA</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jacob DeWitte</strong><br>CEO, Oklo</td><td>Meta's nuclear partner. 1.2GW campus in Ohio</td><td>"How long from breaking ground to first electrons for an Oklo reactor?"</td><td><a href="https://x.com/jacobdewitte">@jacobdewitte</a></td><td>15K</td><td>Santa Clara, CA</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Jigar Shah</strong><br>Dir, DOE Loan Programs Office</td><td>Controls $400B+ in federal energy lending authority. Decides which projects get built</td><td>"How much DOE capital has been deployed since the IRA, and what's the ROI?"</td><td><a href="https://x.com/JigarShahDC">@JigarShahDC</a></td><td>90K</td><td>Washington, DC</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Raffi Garabedian</strong><br>CEO, Electric Hydrogen</td><td>Building the lowest-LCOH electrolyzers. Can do the TWh math live.</td><td>N/A</td><td>N/A</td><td>Natick, MA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jan Wurzbacher</strong><br>Co-CEO, Climeworks</td><td>Running the largest operating DAC plants. Knows the exact kWh per ton of CO₂.</td><td>N/A</td><td>N/A</td><td>Zurich, Switzerland</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Fred Thiel</strong><br>CEO, Marathon Digital</td><td>Largest U.S. bitcoin miner. Already pivoting its 1 GW+ footprint toward AI training.</td><td><a href="https://x.com/fred_thiel">@fred_thiel</a></td><td>20K</td><td>Fort Lauderdale, FL</td></tr>
 </table>
 </div>
 
-<div class="stack">
-<div class="stack-title">Layer 7: Nuclear Fuel Supply Chain</div>
-<div class="stack-q">Even if you build the reactors, where does the fuel come from? Russia enriches 44% of global uranium.</div>
+<!-- ============================ ACT II: SUPPLY ============================ -->
+<div class="act-header">Act II · Supply — "Where Do the Electrons Come From?"</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 6 · "How Much Solar Can You Actually Build in a Year?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>The U.S. added ~43 GW of solar in 2025. Meeting the new demand curve requires ~86 GW/yr. 2,600 GW sits in interconnection queues — 2x the entire installed grid — but only 20% of projects ever reach operation and median wait is 5 years. At current clearance rates, how many GW of solar actually come online per year through 2030?</div>
+<div class="resolution"><strong>Resolution</strong>~55 GW/yr, not 86. The 30 GW/yr gap is the entire "where do the electrons come from" problem in one number. The bottleneck isn't panels, land, or labor — it's paperwork, transmission studies, and network upgrade cost allocation. Software-era capital meets 1970s-era queues.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Amir Vexler</strong><br>CEO, Centrus Energy</td><td>Only Western company that can enrich HALEU (advanced reactor fuel). 70-year chokepoint</td><td>"Centrus is the only company in the West that can make HALEU fuel. What happens if they can't scale?"</td><td>N/A</td><td>N/A</td><td>Bethesda, MD</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Boris Schucht</strong><br>CEO, Urenco</td><td>One of only 3 non-Russian uranium enrichment companies globally</td><td>"What fraction of enriched uranium comes from Russia, and how fast can the West replace it?"</td><td>N/A</td><td>N/A</td><td>Stoke Poges, UK</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Scott Nolan</strong><br>Founders Fund; board, General Atomics</td><td>VC who backs nuclear + defense tech. Sees the capital allocation layer</td><td>"How much private capital has gone into nuclear in the last 3 years vs the prior decade?"</td><td><a href="https://x.com/scottnolan_">@scottnolan_</a></td><td>~10K</td><td>San Francisco, CA</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>John Ketchum</strong><br>CEO, NextEra Energy</td><td>Largest renewables developer on Earth. Sees every interconnection queue simultaneously.</td><td>N/A</td><td>N/A</td><td>Juno Beach, FL</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Abigail Ross Hopper</strong><br>CEO, SEIA</td><td>Speaks for the industry. Has the cleanest aggregate numbers on build rates and queue dynamics.</td><td>N/A</td><td>N/A</td><td>Washington, DC</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Joseph Rand</strong><br>Research Scientist, LBNL</td><td>Co-authors the Queued Up report that everyone cites. The empirical authority on queue throughput.</td><td>N/A</td><td>N/A</td><td>Berkeley, CA</td></tr>
 </table>
 </div>
 
-<div class="stack">
-<div class="stack-title">Layer 8: Energy Policy & Geopolitics</div>
-<div class="stack-q">Who sets the rules that determine which energy sources win?</div>
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 7 · "Why Does a Wind Turbine Cost More Than It Did Three Years Ago?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Onshore wind LCOE fell 71% from 2010 ($135/MWh) to 2020 ($39/MWh). By 2025 it rebounded to ~$60/MWh — a 55% reversal. Decompose the delta: how many $/MWh come from steel, rare earths, interest rates, and siting? At what Henry Hub gas price does onshore wind stop clearing against CCGT?</div>
+<div class="resolution"><strong>Resolution</strong>~$8/MWh steel, ~$4 rare earths, ~$7 rates, ~$2 siting. Wind loses to gas whenever Henry Hub trades below ~$3.50/MMBtu and loses to utility-scale solar almost everywhere. The easy cost declines are over; the industry's future is offshore + storage pairing.</div>
 <table>
-<tr><th>Tier</th><th>Person</th><th>Chokepoint</th><th>Sample Puzzle</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
-<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Chris Wright</strong><br>US Secretary of Energy</td><td>Controls DOE policy, national lab priorities, and energy export decisions</td><td>"The DOE just committed $2.7B to uranium enrichment. What does that buy?"</td><td><a href="https://x.com/prior_chris">@prior_chris</a></td><td>~20K</td><td>Washington, DC</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Sen. Mike Lee</strong><br>Chair, Senate Energy & Natural Resources</td><td>Controls energy legislation pipeline. Utah/Western energy perspective</td><td>"How many energy bills are in committee right now, and which ones will actually pass?"</td><td><a href="https://x.com/SenMikeLee">@SenMikeLee</a></td><td>800K</td><td>Washington, DC</td></tr>
-<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Richard Holtum</strong><br>CEO, Trafigura</td><td>One of the 3 largest physical energy traders in the world. Sees global flows</td><td>"How many barrels of oil does Trafigura move per day, and how is AI changing that number?"</td><td>N/A</td><td>N/A</td><td>Singapore</td></tr>
-<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Daniel Yergin</strong><br>Author, The Prize; VP S&P Global</td><td>The historian of energy. Wrote the Pulitzer-winning book on oil</td><td>"In every energy transition in history, how long did the old source take to decline by 50%?"</td><td><a href="https://x.com/DanielYergin">@DanielYergin</a></td><td>80K</td><td>Washington, DC</td></tr>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Scott Strazik</strong><br>CEO, GE Vernova</td><td>Makes the turbines. Has the gross-margin decomposition by commodity input on his desk.</td><td>N/A</td><td>N/A</td><td>Cambridge, MA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Henrik Andersen</strong><br>CEO, Vestas</td><td>The other global turbine maker. Different supply chain assumptions, same math.</td><td>N/A</td><td>N/A</td><td>Aarhus, Denmark</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>David Hardy</strong><br>CEO, Ørsted Americas</td><td>Lived through the offshore wind write-downs. Understands exactly what the price reversal cost.</td><td>N/A</td><td>N/A</td><td>Boston, MA</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 8 · "What If Natural Gas Is the Answer for the Next 20 Years?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label c">Tier C</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Gas generates ~40% of U.S. electricity. At Henry Hub $3.45/MMBtu, a CCGT produces power at $48–107/MWh. Solar + 4-hour storage sits at $65–110/MWh. At what gas price does solar+storage decisively beat gas on a firm basis — and given the forward curve, how many years does gas stay below that line?</div>
+<div class="resolution"><strong>Resolution</strong>Solar+storage pulls ahead of gas around Henry Hub $4.50/MMBtu on a firm, 24/7 basis. The forward curve keeps gas below that through 2030. Translation: gas is the de facto bridge for at least the next decade, regardless of climate policy — that's the central tension of the entire transition.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Alan Armstrong</strong><br>CEO, Williams Companies</td><td>Owns Transco — the gas artery feeding the Southeast. Sees the pipe utilization numbers daily.</td><td>N/A</td><td>N/A</td><td>Tulsa, OK</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jack Fusco</strong><br>CEO, Cheniere Energy</td><td>Largest U.S. LNG exporter. The hinge between domestic gas prices and global energy security.</td><td>N/A</td><td>N/A</td><td>Houston, TX</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Arjun Murti</strong><br>Partner, Veriten; ex-Goldman Sachs</td><td>The analyst who called peak oil demand early. Respected across the climate-realist spectrum.</td><td><a href="https://x.com/ArjunNMurti">@ArjunNMurti</a></td><td>15K</td><td>New York, NY</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 9 · "How Much Does It Cost to Keep an Old Nuclear Plant Running vs. Building a New One?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Marginal cost to run an existing U.S. reactor: ~$33/MWh. All-in cost of Vogtle 3 & 4: ~$180/MWh — a 5.5x gap. The U.S. has 93 operating reactors, ~95 GW, and they're not in the places where demand is surging. How many of those GW can be life-extended and re-contracted to hyperscalers, and how much firm clean power does that add?</div>
+<div class="resolution"><strong>Resolution</strong>~60 GW is re-contractable — Constellation already signed Meta for 20 years, Microsoft is paying to restart TMI-1. That's the cheapest firm clean power available to AI at any price. The hard truth: every GW of existing nuclear is worth at least 5 GW of new-build promises.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Joe Dominguez</strong><br>CEO, Constellation Energy</td><td>Signed the Meta PPA and the TMI-1 restart. The single most important operator in this story.</td><td>N/A</td><td>N/A</td><td>Baltimore, MD</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Drew Marsh</strong><br>CEO, Entergy</td><td>Runs the Gulf Coast fleet. Living the "old reactors meet new industrial load" problem.</td><td>N/A</td><td>N/A</td><td>New Orleans, LA</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Josh Freed</strong><br>SVP Climate & Energy, Third Way</td><td>The DC operator who actually understands NRC re-licensing economics end-to-end.</td><td><a href="https://x.com/joshfreedDC">@joshfreedDC</a></td><td>8K</td><td>Washington, DC</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 10 · "When Does a Small Modular Reactor Actually Turn On?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Two SMRs operate commercially on Earth (Russia, China). Zero in the U.S. First U.S. construction permit: TVA's BWRX-300, filed 2024, online target 2032. At 300 MW per reactor, closing a 100 GW firm clean power gap takes ~330 SMRs. At today's NRC licensing and construction pace, how many can actually be built and energized by 2035?</div>
+<div class="resolution"><strong>Resolution</strong>20–35 units, at best. That's 6–11 GW — less than one-tenth of what the demand curve requires. SMRs don't meaningfully solve the 2030s gap; they matter for the 2040s. Anyone planning an AI campus around "waiting for the SMR" is planning to fail.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jacob DeWitte</strong><br>Co-Founder & CEO, Oklo</td><td>Amazon-backed, publicly traded, most visible SMR founder. Lives the regulatory timeline.</td><td><a href="https://x.com/jacobdewitte">@jacobdewitte</a></td><td>15K</td><td>Santa Clara, CA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Clay Sell</strong><br>CEO, X-energy</td><td>Building the Dow site — closest thing to a real U.S. SMR industrial deployment.</td><td>N/A</td><td>N/A</td><td>Rockville, MD</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Rachel Slaybaugh</strong><br>Partner, DCVC; Berkeley Nuclear prof</td><td>The nuclear investor who grades the whole field. Honest about what will and won't ship.</td><td><a href="https://x.com/rachelslaybaugh">@rachelslaybaugh</a></td><td>5K</td><td>Berkeley, CA</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 11 · "Is Fusion 10 Years Away, or Is It Actually 10 Years Away This Time?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Private fusion has raised $9.8B+ and delivered zero watts to any grid. Helion's Microsoft PPA targets 50 MW by 2028. CFS targets pilot by early 2030s. 35 of 45 surveyed companies claim pilot plants by 2030–2035. At today's capital-per-watt ($9.8B ÷ expected first-of-kind output), what's the required cost decline to match gas by 2040?</div>
+<div class="resolution"><strong>Resolution</strong>~100x cost decline in 15 years — roughly the solar learning curve compressed into a fraction of the time. Possible? Historically unprecedented. But for the first time, timelines aren't slipping. The question shifted from "does the physics work?" to "can you build a power plant around the physics?"</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Bob Mumgaard</strong><br>Co-Founder & CEO, Commonwealth Fusion Systems</td><td>Best-capitalized, most credible fusion company. Google PPA. Tokamak physics done.</td><td>N/A</td><td>N/A</td><td>Devens, MA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>David Kirtley</strong><br>Co-Founder & CEO, Helion Energy</td><td>Most aggressive timeline (2028 Microsoft PPA). Either a breakthrough or a cautionary tale.</td><td><a href="https://x.com/DavidKirtley">@DavidKirtley</a></td><td>5K</td><td>Everett, WA</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Andrew Holland</strong><br>CEO, Fusion Industry Association</td><td>Tracks every fusion company's milestones. Honest benchmark data, no hype.</td><td>N/A</td><td>~3K</td><td>Washington, DC</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 12 · "What Does a Battery Actually Cost, and What Breaks at 4 Hours?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Utility-scale storage added 15.8 GW in 2025 (+58% YoY). Lazard 2025 LCOS: 2-hour lithium $81–174/MWh, 4-hour ~$150–220/MWh. Doubling duration more than doubles cost because the power electronics and auxiliary systems are fixed and only the cells scale. What does 10-hour storage cost, and how much TWh of it is required to firm a 50% wind+solar PJM-sized grid?</div>
+<div class="resolution"><strong>Resolution</strong>Li-ion 10-hour is &gt;$300/MWh — uneconomic. A PJM-scale 50% VRE grid needs ~1 TWh of long-duration storage. That's the entire missing piece of the 100% renewables puzzle. Without iron-air, flow, or compressed-air at &lt;$50/kWh, gas stays the backstop.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Mateo Jaramillo</strong><br>Co-Founder & CEO, Form Energy</td><td>Built Tesla's battery business, now runs the leading iron-air (100hr) company. The LDES oracle.</td><td>N/A</td><td>N/A</td><td>Somerville, MA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Andrés Gluski</strong><br>CEO, AES</td><td>Deploying GWh-scale storage at more sites than almost anyone. Knows what actually dispatches.</td><td>N/A</td><td>N/A</td><td>Arlington, VA</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Sonia Aggarwal</strong><br>CEO, Energy Innovation; ex-White House climate advisor</td><td>The modeler who quantifies exactly how much storage a clean grid actually requires.</td><td><a href="https://x.com/soniagrrl">@soniagrrl</a></td><td>10K</td><td>San Francisco, CA</td></tr>
+</table>
+</div>
+
+<!-- ============================ ACT III: THE SYSTEM ============================ -->
+<div class="act-header">Act III · The System — "Who Controls It All?"</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 13 · "How Many People Decide Whether Your Lights Stay On?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>PJM serves 67 million people across 13 states on a nonprofit budget of ~$500M. Its control room runs on 4-second dispatch intervals, balancing ~150 GW of generation against load in real time. How many operators sit at the desks on a typical day, and how many MW-decisions per operator per minute does that imply — especially as the mix shifts from big, predictable plants to intermittent renewables and concentrated data centers?</div>
+<div class="resolution"><strong>Resolution</strong>~20 operators per shift controlling ~150 GW — roughly 7.5 GW per operator. Each makes hundreds of micro-decisions per hour. The system works because of rules written for stable, dispatchable plants; the rules are breaking as both ends of the grid go volatile simultaneously.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Manu Asthana</strong><br>CEO, PJM Interconnection</td><td>Runs the control room in the headline market. The single most load-bearing operator in Eastern U.S.</td><td>N/A</td><td>N/A</td><td>Valley Forge, PA</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Elliot Mainzer</strong><br>CEO, CAISO</td><td>Runs the most renewables-heavy grid in North America. Duck curve solved in real time.</td><td>N/A</td><td>N/A</td><td>Folsom, CA</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Ari Peskoe</strong><br>Dir, Harvard Electricity Law Initiative</td><td>Explains the invisible rules that bind the operators' hands. Great on-air explainer.</td><td><a href="https://x.com/AriPeskoe">@AriPeskoe</a></td><td>20K</td><td>Cambridge, MA</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 14 · "How Much Money Flows Through a Barrel of Oil Before It Reaches You?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Trafigura moved ~7 million barrels/day of oil last year and netted ~$7B — roughly $2.75/barrel of margin. Vitol's 2022 profit exceeded $15B. Across 5 steps from wellhead to pump — producer, trader, pipeline/ship, refiner, retailer — how does a $3/gallon retail price actually decompose, and how much of it is the invisible trader layer?</div>
+<div class="resolution"><strong>Resolution</strong>Wellhead ~$1.50 → trader takes ~$0.05 → pipeline/tanker ~$0.15 → refiner ~$0.50 → retailer + tax ~$0.80. Traders look tiny per gallon but capture billions in aggregate because volumes are enormous. The energy transition doesn't eliminate traders — it gives them new molecules (copper, lithium, LNG) to move.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jeremy Weir</strong><br>Executive Chair, Trafigura</td><td>Runs one of the two largest independent traders. Almost never speaks publicly — a true get.</td><td>N/A</td><td>N/A</td><td>Geneva, Switzerland</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Javier Blas</strong><br>Opinion Columnist, Bloomberg; co-author, "The World for Sale"</td><td>The journalist who mapped the trading world. Delivers the structure even without a trader on tape.</td><td><a href="https://x.com/JavierBlas">@JavierBlas</a></td><td>180K</td><td>London, UK</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Helima Croft</strong><br>Global Head Commodity Strategy, RBC; ex-CIA</td><td>Moves seamlessly from OPEC seat allocations to refinery crack spreads. A broadcaster's dream.</td><td><a href="https://x.com/HelimaCroft">@HelimaCroft</a></td><td>50K</td><td>New York, NY</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 15 · "If Iran Closes the Strait of Hormuz, How Many Days Until the Lights Go Out in Tokyo?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>~20% of global petroleum trade passes through Hormuz; ~85% of those flows go to Asia. Japan holds ~145 days of strategic reserves, South Korea ~90, China ~50. At what day of closure does each economy see real fuel-based generation stress? And given the 2026 Iran crisis, what's the actual depletion curve vs. the nominal reserve number?</div>
+<div class="resolution"><strong>Resolution</strong>Japan ~60 real days (logistics erodes nominal 145). Korea ~40. China ~35. Global energy security is a logistics problem, not a reserves problem. The U.S. is structurally insulated post-shale; its allies are not — which is why Hormuz policy is U.S. policy.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Daniel Yergin</strong><br>Vice Chair, S&P Global; author of "The Prize"</td><td>The historian of oil geopolitics. Pulitzer. Delivers the 50-year context nobody else can.</td><td><a href="https://x.com/DanielYergin">@DanielYergin</a></td><td>80K</td><td>Washington, DC</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Amos Hochstein</strong><br>Fmr Senior Advisor for Energy Security, White House</td><td>Ran U.S. energy diplomacy through the Ukraine and Israel–Iran crises. Lived this exact scenario.</td><td>N/A</td><td>N/A</td><td>Washington, DC</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Bob McNally</strong><br>Founder, Rapidan Energy; ex-NSC</td><td>The chokepoint expert who actually models tanker flows day-by-day during crises.</td><td>N/A</td><td>N/A</td><td>Washington, DC</td></tr>
+</table>
+</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 16 · "Who Writes the Rules, and How Far Behind Are They?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label b">Tier B</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>FERC's interconnection rules were designed for ~5–10 GW/yr of new generation entering the queue. In 2023, 300+ GW entered. NEPA reviews average 4.5 years for energy projects. NRC reactor reviews take 5–10 years. At current approval throughput, how many years until the backlog clears — and how many queued GW "age out" (developer abandons, PPA expires) before their permits are issued?</div>
+<div class="resolution"><strong>Resolution</strong>At today's pace, the backlog clears in ~15 years if nothing new arrives. ~40% of currently queued GW will age out. The regulatory framework is the meta-problem underneath every prior episode: demand moves in software time, capital moves in VC time, the grid moves in 1970s federal-register time.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Laura Swett</strong><br>Chair, FERC</td><td>The sitting regulator writing the rewrite. A season-defining booking.</td><td>N/A</td><td>N/A</td><td>Washington, DC</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Rich Glick</strong><br>Fmr Chair, FERC; Founder, GQS New Energy Strategies</td><td>Understands where the queue reforms got stuck and what politically blocks them now.</td><td>N/A</td><td>N/A</td><td>Washington, DC</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Thomas Hochman</strong><br>Dir. of Infrastructure Policy, Foundation for American Innovation</td><td>Writes the sharpest permitting-reform analysis in DC. Speaks the permitting problem in plain English.</td><td><a href="https://x.com/thomasHochman">@thomasHochman</a></td><td>20K</td><td>Washington, DC</td></tr>
+</table>
+</div>
+
+<!-- ============================ EPILOGUE ============================ -->
+<div class="act-header">Epilogue</div>
+
+<div class="episode">
+<div class="episode-head">
+<div class="episode-title">Ep 17 · "What Does America's Energy System Look Like in 2035?"</div>
+<div class="min-tier-badge">Min to air: <span class="tier-label c">Tier C</span></div>
+</div>
+<div class="puzzle"><strong>Puzzle</strong>Add it all up. Incremental demand by 2035: ~400 TWh data centers, ~500 TWh electrification, ~200 TWh reshoring, ~100 TWh hydrogen = ~1,200 TWh. Realistic buildable supply by 2035: ~300 TWh solar, ~150 TWh gas, ~100 TWh wind, ~150 TWh nuclear life-extension, ~100 TWh storage-enabled — roughly 800 TWh. Who fills the 400 TWh gap, and at what price per MWh?</div>
+<div class="resolution"><strong>Resolution</strong>Gas fills most of it, at ~$60–100/MWh. Demand response and efficiency take ~100 TWh off the top. The dark horse is existing nuclear extensions. The wild cards are SMRs and fusion, which contribute &lt;50 TWh combined by 2035. The binding constraint, start to finish, is the grid itself — not any single generation source.</div>
+<table>
+<tr><th>Tier</th><th>Person</th><th>Why This Guest</th><th>X Handle</th><th>~Followers</th><th>Location</th></tr>
+<tr class="tier-a"><td><span class="tier-label a">A</span></td><td><strong>Jesse Jenkins</strong><br>Princeton; Net-Zero America</td><td>Bring back the Ep 0 guest to close the arc. He built the model everyone else cites.</td><td><a href="https://x.com/JesseJenkins">@JesseJenkins</a></td><td>60K</td><td>Princeton, NJ</td></tr>
+<tr class="tier-b"><td><span class="tier-label b">B</span></td><td><strong>Jigar Shah</strong><br>Fmr Dir, DOE Loan Programs Office</td><td>Can walk through project-by-project what clears and what doesn't.</td><td><a href="https://x.com/JigarShahDC">@JigarShahDC</a></td><td>90K</td><td>Washington, DC</td></tr>
+<tr class="tier-c"><td><span class="tier-label c">C</span></td><td><strong>Hal Harvey</strong><br>Founder, Energy Innovation</td><td>If needed, a solo-host + Harvey math episode works: he has the integrated model on hand.</td><td>N/A</td><td>N/A</td><td>San Francisco, CA</td></tr>
 </table>
 </div>
 
 <div class="verdict verdict-ok">
-<strong>Verdict: Extremely resilient. Does NOT break without any single guest.</strong>
-This season has 26 guests across 8 infrastructure layers. The puzzle ("what does AI cost in 2030, and where does the power come from?") can be answered from any layer. A 6-episode arc could pick one guest per layer and have the deepest season in podcast history. Even without Jensen, C.C. Wei, or Liang (the hardest gets), the grid operators (Pablo Vegas), utility CEOs (Ketchum, Womack), nuclear founders (Hopkins, DeWitte), and the energy policy makers (Wright, Shah) are more accessible and have equally unique vantage points that no other podcast is tapping.
+<strong>Verdict: Resilient. The season is aired-worthy at Tier B or better across the board, and airable at Tier C for 3 of 18 episodes.</strong>
+Every episode has a named, quantitative Frontier Puzzle and at least one reachable guest (Tier C). The season does not depend on any single "dream get." Even without the three hardest bookings (Jeremy Weir at Trafigura, Laura Swett at FERC, Manu Asthana at PJM), we can fully produce every episode from Tier B or C — losing some star power but none of the insight. The season's structural integrity is the 3-act arc, not the guest roster.
 <br><br>
-<strong>Strongest 6-episode version without any Tier A:</strong> Dylan Patel (chip economics) &rarr; Chris Miller (geopolitics) &rarr; Dario Amodei (demand) &rarr; Brian Janous (grid reality) &rarr; Jacob DeWitte (nuclear) &rarr; Jigar Shah (policy). Every one of these is gettable, and each controls a different chokepoint.
+<strong>Strongest 18-episode version if no Tier A lands:</strong> Bordoff &rarr; Janous &rarr; Blue &rarr; Shah &rarr; Rao &rarr; Garabedian &rarr; Hopper &rarr; Andersen &rarr; Fusco &rarr; Marsh &rarr; Sell &rarr; Kirtley &rarr; Gluski &rarr; Mainzer &rarr; Blas &rarr; Hochstein &rarr; Glick &rarr; Shah (return). Every one reachable; the season still ships.
 </div>
 </div>
 
@@ -241,7 +444,7 @@ This season has 26 guests across 8 infrastructure layers. The puzzle ("what does
 <h2>Overall Concept Resilience</h2>
 <table>
 <tr><th>Season</th><th>Stack Layers</th><th>Total Guests</th><th>Breaks Without Tier A?</th><th>Assessment</th></tr>
-<tr><td>Compute & Energy</td><td>8 layers</td><td>26</td><td style="color:#a5d6a7">No</td><td>Deepest bench. Any layer can anchor a standalone episode.</td></tr>
+<tr><td>Energy (18 eps, 3 acts)</td><td>Prologue + 3 acts + Epilogue</td><td>54 (3/ep)</td><td style="color:#a5d6a7">No</td><td>Every episode has a Tier C fallback. 3 of 18 are airable at Tier C; rest need at least Tier B.</td></tr>
 <tr><td>Defense</td><td>8 layers</td><td>TBD (full cast)</td><td style="color:#a5d6a7">No</td><td>Deep bench of willing-to-talk defense founders + historians.</td></tr>
 <tr><td>Biology</td><td>8 layers</td><td>TBD (full cast)</td><td style="color:#ffe0b2">Moderate</td><td>Delivery + manufacturing layer has few public-facing people.</td></tr>
 <tr><td>Robotics</td><td>7 layers</td><td>TBD (full cast)</td><td style="color:#a5d6a7">No</td><td>Every humanoid company is interchangeable. Deployment layer is unique.</td></tr>
